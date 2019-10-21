@@ -5,15 +5,13 @@ export class Question extends Component {
     return (
       <div style={styles.question}>
         <div style={styles.avatarWrapper}>
-          <i className='material-icons md-48' style={styles.avatar}>
+          <i className='material-icons md-36' style={styles.avatar}>
             account_circle
           </i>
         </div>
         <div style={styles.headingWrapper}>
           <div style={styles.heading}>
-            <p style={{ ...styles.header, ...styles.trucateText }}>
-              Anonymousssssssssssss
-            </p>
+            <p style={{ ...styles.header, ...styles.trucateText }}>Anonymous</p>
             <small style={styles.trucateText}>{Date.now()}</small>
           </div>
           <div style={styles.spacer} />
@@ -66,8 +64,7 @@ const styles = {
     alignItems: 'center',
   },
   heading: {
-    paddingLeft: '8px',
-    maxWidth: '110px',
+    maxWidth: '120px',
   },
   trucateText: {
     whiteSpace: 'nowrap',
