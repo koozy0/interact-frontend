@@ -15,18 +15,43 @@ body {
   height: 100%;
 }
 
-a {
-  color: unset;
-  text-decoration: unset;
-}
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
+a {
+  color: unset;
+  text-decoration: unset;
+}
+
+p {
+  margin: 0;
+}
+
 i {
   fill: currentColor;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #6f6a6c;
+  border-radius: 4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #4b4547;
 }
 
 #root {

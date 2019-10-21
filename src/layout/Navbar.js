@@ -36,6 +36,7 @@ const styles = {
     position: 'sticky',
     top: '0',
     width: '100%',
+    zIndex: '100',
   },
   spacer: { flex: '1' },
   link: {
