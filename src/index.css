@@ -10,7 +10,7 @@ body {
 html,
 body {
   background-color: #3a3335;
-  color: #fdf0d5;
+  color: #fafaff;
   line-height: 1.5;
   height: 100%;
 }
@@ -23,6 +23,10 @@ a {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+i {
+  fill: currentColor;
 }
 
 #root {

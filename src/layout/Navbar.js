@@ -28,7 +28,7 @@ export default Navbar;
 const styles = {
   navbar: {
     alignItems: 'center',
-    color: '#FDF0D5',
+    color: '#FAFAFF',
     display: 'flex',
     height: '64px',
     justifyContent: 'center',
@@ -41,7 +41,6 @@ const styles = {
   link: {
     alignItems: 'center',
     display: 'flex',
-    fill: 'currentColor',
     height: '50px',
     justifyContent: 'center',
     width: '50px',
