@@ -11,18 +11,20 @@ export class Question extends Component {
         </div>
         <div style={styles.headingWrapper}>
           <div style={styles.heading}>
-            <p style={styles.header}>Anonymous</p>
-            <small>{Date.now()}</small>
+            <p style={{ ...styles.header, ...styles.trucateText }}>
+              Anonymousssssssssssss
+            </p>
+            <small style={styles.trucateText}>{Date.now()}</small>
           </div>
           <div style={styles.spacer} />
           <div style={styles.social}>
             <button style={{ ...styles.socialIcon, ...styles.upvote }}>
               <span style={styles.voteCount}>0</span>
-              <i className='material-icons'>thumb_up</i>
+              <i className='material-icons md-18'>thumb_up</i>
             </button>
             <button style={{ ...styles.socialIcon, ...styles.downvote }}>
               <span style={styles.voteCount}>0</span>
-              <i className='material-icons'>thumb_down</i>
+              <i className='material-icons md-18'>thumb_down</i>
             </button>
           </div>
         </div>
@@ -42,7 +44,7 @@ const styles = {
   question: {
     display: 'grid',
     gridTemplateAreas: "'avatar heading' 'content content'",
-    gridTemplateColumns: '48px 1fr',
+    gridTemplateColumns: '48px minmax(0, 1fr)',
     gridGap: '4px',
     padding: '20px',
     border: '1px solid #fafaff',
@@ -63,6 +65,15 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
   },
+  heading: {
+    paddingLeft: '8px',
+    maxWidth: '110px',
+  },
+  trucateText: {
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+  },
   header: {
     fontSize: '16px',
     fontWeight: '500',
@@ -81,7 +92,7 @@ const styles = {
     outline: 'none',
     border: '1px solid rgba(255,255,255,0.54)',
     color: '#fafaff',
-    padding: '4px 16px',
+    padding: '6px 16px',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
