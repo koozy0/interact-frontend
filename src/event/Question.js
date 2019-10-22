@@ -4,26 +4,33 @@ export class Question extends Component {
   render() {
     return (
       <div style={styles.question}>
-        <div style={styles.avatarWrapper}>
-          <i className='material-icons md-36' style={styles.avatar}>
-            account_circle
-          </i>
-        </div>
-        <div style={styles.headingWrapper}>
-          <div style={styles.heading}>
-            <p style={{ ...styles.header, ...styles.trucateText }}>Anonymous</p>
-            <small style={styles.trucateText}>{Date.now()}</small>
+        <div style={styles.headerWrapper}>
+          <div style={styles.avatarWrapper}>
+            <i className='material-icons md-36' style={styles.avatar}>
+              account_circle
+            </i>
           </div>
-          <div style={styles.spacer} />
-          <div style={styles.social}>
-            <button style={{ ...styles.socialIcon, ...styles.upvote }}>
-              <span style={styles.voteCount}>0</span>
-              <i className='material-icons md-18'>thumb_up</i>
-            </button>
-            <button style={{ ...styles.socialIcon, ...styles.downvote }}>
-              <span style={styles.voteCount}>0</span>
-              <i className='material-icons md-18'>thumb_down</i>
-            </button>
+          <div style={styles.titleWrapper}>
+            <div style={styles.titles}>
+              <p style={{ ...styles.title, ...styles.trucateText }}>
+                Anonymous
+              </p>
+              <small style={{ ...styles.subtitle, ...styles.trucateText }}>
+                {Date.now()}
+              </small>
+            </div>
+            <div style={styles.votesWrapper}>
+              <div style={styles.votes}>
+                <button style={{ ...styles.socialIcon, ...styles.upvote }}>
+                  <span style={styles.voteCount}>0</span>
+                  <i className='material-icons md-18'>thumb_up</i>
+                </button>
+                <button style={{ ...styles.socialIcon, ...styles.downvote }}>
+                  <span style={styles.voteCount}>0</span>
+                  <i className='material-icons md-18'>thumb_down</i>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
         <div style={styles.content}>
@@ -41,30 +48,47 @@ export default Question;
 const styles = {
   question: {
     display: 'grid',
-    gridTemplateAreas: "'avatar heading' 'content content'",
-    gridTemplateColumns: '48px minmax(0, 1fr)',
+    gridTemplateAreas: "'header' 'content'",
     gridGap: '4px',
     padding: '20px',
     border: '1px solid #fafaff',
     borderRadius: '4px',
     marginBottom: '4px',
+    overflow: 'auto',
+  },
+  headerWrapper: {
+    gridArea: 'header',
+    display: 'grid',
+    gridTemplateAreas: "'avatar title'",
+    gridTemplateColumns: '48px 1fr',
+    gridGap: '20px',
+  },
+  content: {
+    gridArea: 'content',
   },
   avatarWrapper: {
     gridArea: 'avatar',
-    width: '48px',
-    height: '48px',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  headingWrapper: {
-    gridArea: 'heading',
+  titleWrapper: {
+    gridArea: 'title',
     display: 'flex',
-    justifyContent: 'center',
     alignItems: 'center',
+    flexWrap: 'wrap',
   },
-  heading: {
-    maxWidth: '120px',
+  titles: {
+    flex: '1',
+    padding: '8px 0',
+  },
+  votesWrapper: {
+    flex: '1',
+    padding: '8px 0',
+  },
+  votes: {
+    display: 'flex',
+    justifyContent: 'flex-end',
   },
   trucateText: {
     whiteSpace: 'nowrap',
@@ -74,9 +98,6 @@ const styles = {
   header: {
     fontSize: '16px',
     fontWeight: '500',
-  },
-  content: {
-    gridArea: 'content',
   },
   spacer: {
     flex: '1',
@@ -94,6 +115,8 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     cursor: 'pointer',
+    flex: '1',
+    maxWidth: '100px',
   },
   voteCount: {
     marginRight: '8px',
