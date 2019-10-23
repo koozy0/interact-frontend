@@ -16,20 +16,21 @@ export class Question extends Component {
                 Anonymous
               </p>
               <small style={{ ...styles.subtitle, ...styles.trucateText }}>
-                {Date.now()}
+                {new Date()
+                  .toJSON()
+                  .slice(0, 10)
+                  .replace(/-/g, '/')}
               </small>
             </div>
-            <div style={styles.votesWrapper}>
-              <div style={styles.votes}>
-                <button style={{ ...styles.socialIcon, ...styles.upvote }}>
-                  <span style={styles.voteCount}>0</span>
-                  <i className='material-icons md-18'>thumb_up</i>
-                </button>
-                <button style={{ ...styles.socialIcon, ...styles.downvote }}>
-                  <span style={styles.voteCount}>0</span>
-                  <i className='material-icons md-18'>thumb_down</i>
-                </button>
-              </div>
+            <div style={styles.votes}>
+              <button style={{ ...styles.socialIcon, ...styles.upvote }}>
+                <span style={styles.voteCount}>0</span>
+                <i className='material-icons md-18'>thumb_up</i>
+              </button>
+              <button style={{ ...styles.socialIcon, ...styles.downvote }}>
+                <span style={styles.voteCount}>0</span>
+                <i className='material-icons md-18'>thumb_down</i>
+              </button>
             </div>
           </div>
         </div>
@@ -81,14 +82,11 @@ const styles = {
   titles: {
     flex: '1',
     padding: '8px 0',
-  },
-  votesWrapper: {
-    flex: '1',
-    padding: '8px 0',
+    minWidth: '100px',
   },
   votes: {
     display: 'flex',
-    justifyContent: 'flex-end',
+    padding: '8px 0',
   },
   trucateText: {
     whiteSpace: 'nowrap',
