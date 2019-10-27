@@ -26,11 +26,13 @@ export class Event extends Component {
             <div style={styles.subheaderWrapper}>
               <p>5 questions</p>
               <div style={styles.spacer} />
-              <select style={styles.select}>
-                <option style={styles.option} selected>
+              <select style={styles.select} value='popular'>
+                <option style={styles.option} value='popular'>
                   Popular
                 </option>
-                <option style={styles.option}>Created</option>
+                <option style={styles.option} value='created'>
+                  Created
+                </option>
               </select>
             </div>
 

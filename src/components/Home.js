@@ -1,8 +1,27 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
-export class Home extends Component {
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getEvents } from '../actions/event';
+
+class Home extends Component {
+  componentDidMount() {
+    this.props.getEvents();
+  }
+
+  onChange = e => {
+    const searchTerm = e.currentTarget.value;
+
+    if (searchTerm.length > 3) {
+      console.log(searchTerm);
+    }
+  };
+
   render() {
+    const { events } = this.props.event;
+    console.log(events);
+
     return (
       <div style={styles.home}>
         <div style={styles.formWrapper}>
@@ -19,6 +38,7 @@ export class Home extends Component {
               type='text'
               style={styles.searchbox}
               placeholder='enter code here'
+              onChange={this.onChange}
             />
             <Link
               to='/event'
@@ -36,14 +56,30 @@ export class Home extends Component {
   }
 }
 
-export default Home;
+Home.propTypes = {
+  getEvents: PropTypes.func.isRequired,
+  event: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = state => ({
+  event: state.event,
+});
+
+const mapDispatchToProps = { getEvents };
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Home);
 
 const styles = {
   home: {
-    flex: '1',
-    marginTop: '45vh',
-    paddingLeft: '20px',
-    paddingRight: '20px',
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '100%',
+    padding: '0 16px',
   },
   formWrapper: {
     width: '100%',
