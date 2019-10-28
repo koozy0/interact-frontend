@@ -1,3 +1,11 @@
+:root {
+  --dark: #3a3335;
+  --light: #fafaff;
+  --danger: #f52f57;
+  --warn: #f4d06f;
+  --success: #41ead4;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -9,7 +17,7 @@ body {
 
 html,
 body {
-  background-color: #3a3335;
+  background-color: var(--dark);
   color: #fafaff;
   line-height: 1.5;
   height: 100%;

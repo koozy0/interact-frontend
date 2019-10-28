@@ -12,8 +12,9 @@ class Admin extends Component {
             <Link to='/events/manage'>Manage Events</Link>
           </li>
           <li>
-            <Link to='/events/create'>Create Events</Link>
+            <Link to='/events/create'>Create Event</Link>
           </li>
+          <li>Logout</li>
         </ul>
       </div>
     );

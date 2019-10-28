@@ -29,7 +29,7 @@ export const loadUser = () => async (dispatch, getState) => {
       dispatch({ type: USER_LOADED, payload: user.data });
     }
   } catch (err) {
-    // dispatch(returnErrors(err.response.data, err.response.status));
+    dispatch(returnErrors(err.response.data, err.response.status));
     dispatch({ type: AUTH_ERROR });
     localStorage.removeItem('token');
   }

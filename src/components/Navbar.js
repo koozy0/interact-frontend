@@ -5,10 +5,6 @@ import { connect } from 'react-redux';
 
 export class Navbar extends Component {
   render() {
-    const { isAuthenticated, isAdmin } = this.props;
-    const isLoggedInAsAdmin = !!(isAuthenticated && isAdmin);
-    const adminLink = isLoggedInAsAdmin ? '/admin' : '/admin/login';
-
     return (
       <nav style={styles.navbar}>
         <Link to='/'>
@@ -19,7 +15,7 @@ export class Navbar extends Component {
         <div style={styles.spacer} />
         <span style={styles.title}>interact</span>
         <div style={styles.spacer} />
-        <Link to={adminLink}>
+        <Link to='/admin'>
           <i className='material-icons' style={styles.link}>
             person
           </i>

@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import Admin from './components/admin/Admin';
 import AdminLogin from './components/admin/AdminLogin';
 import CreateEvent from './components/admin/CreateEvent';
+import Event from './components/Event';
 import Home from './components/Home';
 import ManageEvent from './components/admin/ManageEvent';
 import NotFound from './components/NotFound';
@@ -12,7 +13,7 @@ import { connect } from 'react-redux';
 
 class AppRoutes extends Component {
   render() {
-    const { isAuthenticated, isAdmin } = this.props;
+    const { isAuthenticated, isAdmin } = this.props.user;
     const isLoggedInAsAdmin = !!(isAuthenticated && isAdmin);
 
     return (
@@ -21,23 +22,23 @@ class AppRoutes extends Component {
 
         <Route path='/admin/login' component={AdminLogin} />
 
-        <PrivateRoute path='/admin' isLoggedInAsAdmin={isLoggedInAsAdmin}>
-          <Admin></Admin>
-        </PrivateRoute>
+        <PrivateRoute
+          path='/admin'
+          isLoggedInAsAdmin={isLoggedInAsAdmin}
+          component={Admin}
+        />
 
         <PrivateRoute
           path='/events/create'
           isLoggedInAsAdmin={isLoggedInAsAdmin}
-        >
-          <CreateEvent></CreateEvent>
-        </PrivateRoute>
+          component={CreateEvent}
+        />
 
         <PrivateRoute
           path='/events/manage'
           isLoggedInAsAdmin={isLoggedInAsAdmin}
-        >
-          <ManageEvent></ManageEvent>
-        </PrivateRoute>
+          component={ManageEvent}
+        />
 
         <Route path='/events/:id' component={Event} />
 

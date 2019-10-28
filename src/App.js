@@ -1,18 +1,11 @@
 import './App.css';
 
-import { Event, Navbar } from './components';
 import React, { Component } from 'react';
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
-import Admin from './components/admin/Admin';
-import AdminLogin from './components/admin/AdminLogin';
 import AppRoutes from './AppRoutes';
-import CreateEvent from './components/admin/CreateEvent';
-import Home from './components/Home';
-import ManageEvent from './components/admin/ManageEvent';
-import NotFound from './components/NotFound';
-import PrivateRoute from './components/admin/PrivateRoute';
+import Navbar from './components/Navbar';
 import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
 // import { loadUser } from './actions/user';
 import openSocket from 'socket.io-client';
 import store from './store';

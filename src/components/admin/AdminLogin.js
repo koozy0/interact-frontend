@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import Alert from '../Alert';
 import { clearErrors } from '../../actions/error';
 import { connect } from 'react-redux';
 import { login } from '../../actions/user';
@@ -34,7 +35,6 @@ class AdminLogin extends Component {
     }
 
     if (isAuthenticated && isAdmin) {
-      console.log('here');
       this.props.history.push('/admin');
     }
   }
@@ -44,6 +44,7 @@ class AdminLogin extends Component {
       <div className='container'>
         <h1 style={styles.header}>Admin Login</h1>
         <form style={styles.form} onSubmit={this.onSubmit}>
+          <Alert msg={this.props.error.data.msg} />
           <div style={styles.inputGrp}>
             <label htmlFor='username' style={styles.label}>
               Username
