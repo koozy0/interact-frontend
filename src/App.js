@@ -25,7 +25,7 @@ class App extends Component {
             <Navbar />
             <Route exact path='/' component={Home} />
             <Route path='/admin' component={Admin} />
-            <Route path='/event' component={Event} />
+            <Route path='/events/:id' component={Event} />
           </div>
         </Router>
       </Provider>

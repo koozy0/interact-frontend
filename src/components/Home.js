@@ -1,55 +1,54 @@
 import React, { Component } from 'react';
+import { clearEvents, getEvents, searchEvents } from '../actions/event';
 
-import { Link } from 'react-router-dom';
+import AutocompleteItem from './AutocompleteItem';
 import PropTypes from 'prop-types';
+import Searchbox from './Searchbox';
+import axios from 'axios';
 import { connect } from 'react-redux';
-import { getEvents } from '../actions/event';
 
 class Home extends Component {
-  componentDidMount() {
-    this.props.getEvents();
-  }
-
-  onChange = e => {
+  // TODO: debounce the onChange event handler to prevent excessive requests
+  onInputChange = e => {
     const searchTerm = e.currentTarget.value;
 
-    if (searchTerm.length > 3) {
-      console.log(searchTerm);
+    // Cancel the previous request
+    if (typeof this._source !== typeof undefined) {
+      this._source.cancel('Operation cancelled due to new request');
     }
+
+    // Save the new request for cancellation
+    this._source = axios.CancelToken.source();
+
+    // Only make new requests when search term is > 3 chars long
+    if (searchTerm.length > 3) {
+      this.props.searchEvents(searchTerm, this._source.token);
+    } else {
+      this.props.clearEvents();
+    }
+  };
+
+  clearEventsOnSelect = () => {
+    this.props.clearEvents();
   };
 
   render() {
     const { events } = this.props.event;
-    console.log(events);
 
     return (
       <div style={styles.home}>
         <div style={styles.formWrapper}>
-          <form style={styles.form}>
-            <div
-              style={{
-                ...styles.searchboxAside,
-                ...styles.searchboxAsideLeft,
-              }}
-            >
-              #
-            </div>
-            <input
-              type='text'
-              style={styles.searchbox}
-              placeholder='enter code here'
-              onChange={this.onChange}
-            />
-            <Link
-              to='/event'
-              style={{
-                ...styles.searchboxAside,
-                ...styles.searchboxAsideRight,
-              }}
-            >
-              <i className='material-icons'>arrow_forward</i>
-            </Link>
-          </form>
+          <Searchbox onInputChange={this.onInputChange} />
+          <ul style={styles.autocompleteWrapper}>
+            {events.map(evt => (
+              <AutocompleteItem
+                key={evt._id}
+                name={evt.name}
+                code={evt.code}
+                clearEventsOnSelect={this.clearEventsOnSelect}
+              />
+            ))}
+          </ul>
         </div>
       </div>
     );
@@ -57,7 +56,9 @@ class Home extends Component {
 }
 
 Home.propTypes = {
+  clearEvents: PropTypes.func.isRequired,
   getEvents: PropTypes.func.isRequired,
+  searchEvents: PropTypes.func.isRequired,
   event: PropTypes.object.isRequired,
 };
 
@@ -65,7 +66,7 @@ const mapStateToProps = state => ({
   event: state.event,
 });
 
-const mapDispatchToProps = { getEvents };
+const mapDispatchToProps = { clearEvents, getEvents, searchEvents };
 
 export default connect(
   mapStateToProps,
@@ -87,36 +88,17 @@ const styles = {
     margin: '0 auto',
     position: 'relative',
   },
-  searchbox: {
-    width: '100%',
-    padding: '16px 48px',
-    fontSize: '16px',
-    borderRadius: '50px',
-    border: '0',
-    boxShadow: '0 5px 15px 0 rgba(0, 0, 0, 0.87)',
-    outline: 'none',
-    lineHeight: '24px',
-    backgroundColor: '#FAFAFF',
-  },
-  searchboxAside: {
-    height: '36px',
-    width: '36px',
+  autocompleteWrapper: {
+    listStyleType: 'none',
+    padding: '0',
     position: 'absolute',
-    borderRadius: '18px',
-    top: '10px',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  searchboxAsideLeft: {
-    left: '16px',
-    top: '10px',
-    color: '#3a3335',
-    fontSize: '16px',
-  },
-  searchboxAsideRight: {
-    right: '16px',
-    top: '10px',
-    backgroundColor: '#41EAD4',
+    width: '100%',
+    maxHeight: '104px',
+    overflow: 'auto',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    marginTop: '4px',
+    marginBottom: '0',
+    boxShadow: 'rgba(0, 0, 0, 0.54) 0px 2px 5px 0px',
   },
 };

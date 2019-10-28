@@ -1,9 +1,11 @@
 import {
+  CLEAR_EVENTS,
   CREATE_EVENT,
   DELETE_EVENT,
   EVENTS_LOADING,
   GET_EVENT,
   GET_EVENTS,
+  SEARCH_EVENTS,
   UPDATE_EVENT,
 } from '../actions/types';
 
@@ -14,6 +16,12 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
+    case CLEAR_EVENTS:
+      return {
+        ...state,
+        events: [],
+      };
+
     case CREATE_EVENT:
       return {
         ...state,
@@ -22,6 +30,12 @@ export default function(state = initialState, action) {
     case DELETE_EVENT:
       return {
         ...state,
+      };
+
+    case EVENTS_LOADING:
+      return {
+        ...state,
+        loading: true,
       };
 
     case GET_EVENT:
@@ -34,15 +48,16 @@ export default function(state = initialState, action) {
         ...state,
       };
 
+    case SEARCH_EVENTS:
+      return {
+        ...state,
+        events: action.payload,
+        loading: false,
+      };
+
     case UPDATE_EVENT:
       return {
         ...state,
-      };
-
-    case EVENTS_LOADING:
-      return {
-        ...state,
-        loading: true,
       };
 
     default:
