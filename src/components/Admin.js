@@ -1,11 +1,26 @@
 import React, { Component } from 'react';
 
 export class Admin extends Component {
+  state = {
+    username: '',
+    password: '',
+    msg: null,
+  };
+
+  onChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
+    console.log(this.state);
+  };
+
   render() {
     return (
       <div className='container'>
         <h1 style={styles.header}>Admin Login</h1>
-        <form style={styles.form}>
+        <form style={styles.form} onSubmit={this.onSubmit}>
           <div style={styles.inputGrp}>
             <label for='username' style={styles.label}>
               Username
@@ -13,7 +28,9 @@ export class Admin extends Component {
             <input
               type='text'
               id='username'
+              name='username'
               autocomplete='off'
+              onChange={this.onChange}
               style={styles.input}
             />
           </div>
@@ -25,12 +42,14 @@ export class Admin extends Component {
             <input
               type='password'
               id='password'
+              name='password'
               autocomplete='off'
+              onChange={this.onChange}
               style={styles.input}
             />
           </div>
 
-          <button type='button' style={styles.login}>
+          <button type='submit' style={styles.login}>
             Login
           </button>
         </form>

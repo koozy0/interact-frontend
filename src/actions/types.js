@@ -6,3 +6,6 @@ export const GET_EVENT = 'GET_EVENT';
 export const GET_EVENTS = 'GET_EVENTS';
 export const SEARCH_EVENTS = 'SEARCH_EVENTS';
 export const UPDATE_EVENT = 'UPDATE_EVENT';
+
+export const GET_ERRORS = 'GET_ERRORS';
+export const CLEAR_ERRORS = 'CLEAR_ERRORS';
