@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { clearErrors } from '../../actions/error';
 import { connect } from 'react-redux';
 import { login } from '../../actions/user';
-import { useHistory } from 'react-router-dom';
 
 class AdminLogin extends Component {
   state = {
@@ -23,7 +22,7 @@ class AdminLogin extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    const { error, isAuthenticated } = this.props;
+    const { error, isAuthenticated, isAdmin } = this.props;
 
     if (error !== prevProps.error) {
       // Check for login error
@@ -34,8 +33,9 @@ class AdminLogin extends Component {
       }
     }
 
-    if (isAuthenticated) {
-      this.props.history.push('/events/manage');
+    if (isAuthenticated && isAdmin) {
+      console.log('here');
+      this.props.history.push('/admin');
     }
   }
 
@@ -83,6 +83,7 @@ class AdminLogin extends Component {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.user.isAuthenticated,
+  isAdmin: state.user.isAdmin,
   error: state.error,
 });
 

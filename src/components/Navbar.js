@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 export class Navbar extends Component {
   render() {
+    const { isAuthenticated, isAdmin } = this.props;
+    const isLoggedInAsAdmin = !!(isAuthenticated && isAdmin);
+    const adminLink = isLoggedInAsAdmin ? '/admin' : '/admin/login';
+
     return (
       <nav style={styles.navbar}>
         <Link to='/'>
@@ -14,7 +19,7 @@ export class Navbar extends Component {
         <div style={styles.spacer} />
         <span style={styles.title}>interact</span>
         <div style={styles.spacer} />
-        <Link to='/admin/login'>
+        <Link to={adminLink}>
           <i className='material-icons' style={styles.link}>
             person
           </i>
@@ -24,7 +29,17 @@ export class Navbar extends Component {
   }
 }
 
-export default Navbar;
+const mapStateToProps = state => ({
+  isAuthenticated: state.user.isAuthenticated,
+  isAdmin: state.user.isAdmin,
+});
+
+const mapDispatchToProps = {};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Navbar);
 
 const styles = {
   navbar: {
