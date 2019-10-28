@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 
-export class Admin extends Component {
+import { clearErrors } from '../../actions/error';
+import { connect } from 'react-redux';
+import { login } from '../../actions/user';
+import { useHistory } from 'react-router-dom';
+
+class AdminLogin extends Component {
   state = {
     username: '',
     password: '',
@@ -13,8 +18,26 @@ export class Admin extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    console.log(this.state);
+    const { username, password } = this.state;
+    this.props.login({ username, password });
   };
+
+  componentDidUpdate(prevProps) {
+    const { error, isAuthenticated } = this.props;
+
+    if (error !== prevProps.error) {
+      // Check for login error
+      if (error.id === 'LOGIN_FAILURE') {
+        this.setState({ msg: error.msg.msg });
+      } else {
+        this.setState({ msg: null });
+      }
+    }
+
+    if (isAuthenticated) {
+      this.props.history.push('/events/manage');
+    }
+  }
 
   render() {
     return (
@@ -22,28 +45,28 @@ export class Admin extends Component {
         <h1 style={styles.header}>Admin Login</h1>
         <form style={styles.form} onSubmit={this.onSubmit}>
           <div style={styles.inputGrp}>
-            <label for='username' style={styles.label}>
+            <label htmlFor='username' style={styles.label}>
               Username
             </label>
             <input
               type='text'
               id='username'
               name='username'
-              autocomplete='off'
+              autoComplete='off'
               onChange={this.onChange}
               style={styles.input}
             />
           </div>
 
           <div style={styles.inputGrp}>
-            <label for='password' style={styles.label}>
+            <label htmlFor='password' style={styles.label}>
               Password
             </label>
             <input
               type='password'
               id='password'
               name='password'
-              autocomplete='off'
+              autoComplete='off'
               onChange={this.onChange}
               style={styles.input}
             />
@@ -58,7 +81,17 @@ export class Admin extends Component {
   }
 }
 
-export default Admin;
+const mapStateToProps = state => ({
+  isAuthenticated: state.user.isAuthenticated,
+  error: state.error,
+});
+
+const mapDispatchToProps = { login, clearErrors };
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(AdminLogin);
 
 const styles = {
   header: {

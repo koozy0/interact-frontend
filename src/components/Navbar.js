@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import { Link } from 'react-router-dom';
 
 export class Navbar extends Component {
@@ -13,7 +14,7 @@ export class Navbar extends Component {
         <div style={styles.spacer} />
         <span style={styles.title}>interact</span>
         <div style={styles.spacer} />
-        <Link to='/admin'>
+        <Link to='/admin/login'>
           <i className='material-icons' style={styles.link}>
             person
           </i>

@@ -32,11 +32,11 @@ export default function(state = initialState, action) {
     case LOGIN_SUCCESS:
       return {
         ...state,
-        ...action.payload,
+        token: action.payload.token,
         isAuthenticated: true,
         isLoading: false,
-        isAdmin: action.payload.role.includes('administrator'),
-        user: action.payload,
+        isAdmin: action.payload.user.role.includes('administrator'),
+        user: action.payload.user,
       };
 
     case USER_LOADED:
@@ -44,7 +44,7 @@ export default function(state = initialState, action) {
         ...state,
         isAuthenticated: true,
         isLoading: false,
-        isAdmin: action.payload.role.includes('administrator'),
+        isAdmin: action.payload.user.role.includes('administrator'),
         user: action.payload,
       };
 
