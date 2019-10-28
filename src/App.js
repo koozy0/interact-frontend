@@ -2,9 +2,10 @@ import './App.css';
 
 import { Admin, Event, Navbar } from './components';
 import React, { Component } from 'react';
-import { Route, BrowserRouter as Router } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import Home from './components/Home';
+import NotFound from './components/NotFound';
 import { Provider } from 'react-redux';
 import openSocket from 'socket.io-client';
 import store from './store';
@@ -23,9 +24,13 @@ class App extends Component {
         <Router>
           <div className='App'>
             <Navbar />
-            <Route exact path='/' component={Home} />
-            <Route path='/admin' component={Admin} />
-            <Route path='/events/:id' component={Event} />
+
+            <Switch>
+              <Route exact path='/' component={Home} />
+              <Route path='/admin' component={Admin} />
+              <Route path='/events/:id' component={Event} />
+              <Route component={NotFound} />
+            </Switch>
           </div>
         </Router>
       </Provider>

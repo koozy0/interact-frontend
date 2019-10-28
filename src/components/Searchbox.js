@@ -18,7 +18,7 @@ const Searchbox = ({ onInputChange }) => (
       onChange={onInputChange}
     />
     <Link
-      to='/event'
+      to='/events'
       style={{
         ...styles.searchboxAside,
         ...styles.searchboxAsideRight,

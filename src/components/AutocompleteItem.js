@@ -7,7 +7,7 @@ const AutocompleteItem = ({ name, code, clearEventsOnSelect }) => (
     style={styles.autocompleteItem}
     onClick={clearEventsOnSelect}
   >
-    <Link to={`/event/${code}`} style={styles.link}>
+    <Link to={`/events/${code}`} style={styles.link}>
       {name} - #{code}
     </Link>
   </li>
