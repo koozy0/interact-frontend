@@ -13,7 +13,7 @@ const styles = {
     padding: '12px 16px',
     backgroundColor: 'var(--danger)',
     borderRadius: '4px',
-    fontWeight: '500',
+    marginBottom: '16px',
   },
   msg: {
     overflow: 'hidden',

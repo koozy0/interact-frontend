@@ -18,6 +18,21 @@ interactApi.searchEvents = (q, cancelToken) =>
     ...(cancelToken && { cancelToken }),
   });
 
+interactApi.createEvent = (token, { createdBy, name, code, start, end }) =>
+  client.post(
+    '/events',
+    {
+      createdBy,
+      name,
+      code,
+      start,
+      end,
+    },
+    {
+      ...(token && { headers: { 'x-auth-token': token } }),
+    },
+  );
+
 // users
 interactApi.getUser = token =>
   client.get(`/auth/user`, {

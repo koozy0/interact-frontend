@@ -62,6 +62,6 @@ const styles = {
   searchboxAsideRight: {
     right: '16px',
     top: '10px',
-    backgroundColor: 'var(--success)',
+    backgroundColor: 'var(--primary)',
   },
 };

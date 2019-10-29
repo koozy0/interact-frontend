@@ -60,7 +60,7 @@ const styles = {
   textareaWrapper: { position: 'relative' },
   textareaIcon: {
     alignItems: 'center',
-    color: 'var(--success)',
+    color: 'var(--primary)',
     display: 'flex',
     height: '36px',
     justifyContent: 'center',

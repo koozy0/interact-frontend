@@ -3,7 +3,9 @@
   --light: #fafaff;
   --danger: #f52f57;
   --warn: #f4d06f;
-  --success: #41ead4;
+  --success: #37ff8b;
+  --primary: #41ead4;
+  --secondary: #51d6ff;
 }
 
 body {

@@ -61,6 +61,6 @@ const styles = {
   title: {
     fontSize: '20px',
     fontWeight: '500',
-    color: 'var(--success)',
+    color: 'var(--primary)',
   },
 };
