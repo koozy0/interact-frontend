@@ -1,6 +1,12 @@
-import React, { Component } from 'react';
-import { clearEvents, searchEvents } from '../actions/event';
+import React, { Component, Fragment } from 'react';
+import {
+  clearEvents,
+  clearSelected,
+  getEvent,
+  searchEvents,
+} from '../actions/event';
 
+import Alert from './Alert';
 import Autocomplete from './Autocomplete';
 import PropTypes from 'prop-types';
 import axios from 'axios';
@@ -10,6 +16,19 @@ class Home extends Component {
   state = {
     searchTerm: '',
   };
+
+  componentDidMount() {
+    // Clear selected Event
+    this.props.clearSelected();
+  }
+
+  componentDidUpdate() {
+    const { isLoading, selected } = this.props.event;
+
+    if (!isLoading && selected) {
+      this.props.history.push(`/events/${selected.code}`);
+    }
+  }
 
   // TODO: debounce the onChange event handler to prevent excessive requests
   onChange = e => {
@@ -38,12 +57,13 @@ class Home extends Component {
     this.props.clearEvents();
     const { searchTerm } = this.state;
     // get event
-    // if event is found change page else show error
-    this.props.history.push(`/events/${searchTerm}`);
+    this.props.getEvent(searchTerm);
   };
 
   onSelect = suggestion => {
-    console.log(suggestion);
+    const { code } = suggestion;
+    // get event
+    this.props.getEvent(code);
   };
 
   clearEventsOnSelect = () => {
@@ -52,34 +72,50 @@ class Home extends Component {
 
   render() {
     const { events, isLoading } = this.props.event;
+    const errMsg = this.props.error.data.msg || '';
 
     return (
-      <div style={styles.home}>
-        <div style={styles.formWrapper}>
-          <Autocomplete
-            suggestions={events}
-            isLoading={isLoading}
-            onChange={this.onChange}
-            onSubmit={this.onSubmit}
-            onSelect={this.onSelect}
-          />
+      <Fragment>
+        <div style={styles.home}>
+          <div style={styles.formWrapper}>
+            <Autocomplete
+              suggestions={events}
+              isLoading={isLoading}
+              onChange={this.onChange}
+              onSubmit={this.onSubmit}
+              onSelect={this.onSelect}
+            />
+          </div>
         </div>
-      </div>
+
+        <div style={styles.errorWrapper}>
+          <Alert msg={errMsg} color='danger' visible={errMsg.length > 0} />
+        </div>
+      </Fragment>
     );
   }
 }
 
 Home.propTypes = {
   clearEvents: PropTypes.func.isRequired,
+  clearSelected: PropTypes.func.isRequired,
+  getEvent: PropTypes.func.isRequired,
   searchEvents: PropTypes.func.isRequired,
   event: PropTypes.object.isRequired,
+  error: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
   event: state.event,
+  error: state.error,
 });
 
-const mapDispatchToProps = { clearEvents, searchEvents };
+const mapDispatchToProps = {
+  clearEvents,
+  clearSelected,
+  getEvent,
+  searchEvents,
+};
 
 export default connect(
   mapStateToProps,
@@ -113,5 +149,11 @@ const styles = {
     marginTop: '4px',
     marginBottom: '0',
     boxShadow: 'rgba(0, 0, 0, 0.54) 0px 2px 5px 0px',
+  },
+  errorWrapper: {
+    position: 'fixed',
+    bottom: '48px',
+    left: '50%',
+    transform: 'translateX(-50%)',
   },
 };

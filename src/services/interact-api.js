@@ -12,6 +12,8 @@ interactApi.getEvents = token =>
     ...(token && { headers: { 'x-auth-token': token } }),
   });
 
+interactApi.getEvent = eventCode => client.get(`/events/${eventCode}`);
+
 interactApi.searchEvents = (q, cancelToken) =>
   client.get('/events/search', {
     params: { q: q.trim() },

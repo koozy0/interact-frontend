@@ -1,5 +1,6 @@
 // events
 export const CLEAR_EVENTS = 'CLEAR_EVENTS';
+export const CLEAR_SELECTED = 'CLEAR_SELECTED';
 export const CREATE_EVENT = 'CREATE_EVENT';
 export const CREATE_EVENT_SUCCESS = 'CREATE_EVENT_SUCCESS';
 export const DELETE_EVENT = 'DELETE_EVENT';

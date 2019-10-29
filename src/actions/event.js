@@ -1,5 +1,6 @@
 import {
   CLEAR_EVENTS,
+  CLEAR_SELECTED,
   CREATE_EVENT,
   CREATE_EVENT_SUCCESS,
   DELETE_EVENT,
@@ -17,6 +18,12 @@ import interactApi from '../services/interact-api';
 export const clearEvents = () => {
   return {
     type: CLEAR_EVENTS,
+  };
+};
+
+export const clearSelected = () => {
+  return {
+    type: CLEAR_SELECTED,
   };
 };
 
@@ -53,7 +60,7 @@ export const getEvents = () => async dispatch => {
   }
 };
 
-export const searchEvents = q => async dispatch => {
+export const getEvent = eventCode => async dispatch => {
   // Clear errors
   dispatch(clearErrors());
 
@@ -61,6 +68,34 @@ export const searchEvents = q => async dispatch => {
   dispatch(eventsLoading());
 
   // Fetch Events
+  try {
+    const res = await interactApi.getEvent(eventCode);
+
+    dispatch({
+      type: GET_EVENT,
+      payload: res.data,
+    });
+  } catch (err) {
+    const data = (err.response && err.response.data) || {
+      msg: err.message,
+    };
+    const status = (err.response && err.response.status) || null;
+
+    dispatch(returnErrors(data, status));
+    dispatch({
+      type: EVENT_ERROR,
+    });
+  }
+};
+
+export const searchEvents = q => async dispatch => {
+  // Clear errors
+  dispatch(clearErrors());
+
+  // Events loading
+  dispatch(eventsLoading());
+
+  // Fetch Event
   try {
     const res = await interactApi.searchEvents(q);
 

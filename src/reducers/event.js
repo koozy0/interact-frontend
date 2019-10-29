@@ -1,5 +1,6 @@
 import {
   CLEAR_EVENTS,
+  CLEAR_SELECTED,
   CREATE_EVENT,
   CREATE_EVENT_SUCCESS,
   DELETE_EVENT,
@@ -24,6 +25,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         events: [],
+      };
+
+    case CLEAR_SELECTED:
+      return {
+        ...state,
+        selected: null,
       };
 
     case CREATE_EVENT:
@@ -58,6 +65,8 @@ export default function(state = initialState, action) {
     case GET_EVENT:
       return {
         ...state,
+        selected: action.payload,
+        isLoading: false,
       };
 
     case GET_EVENTS:
