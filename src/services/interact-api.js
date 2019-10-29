@@ -7,7 +7,10 @@ const client = new ApiService({ baseURL: BASE_URL });
 const interactApi = {};
 
 // events
-interactApi.getEvents = () => client.get('/events');
+interactApi.getEvents = token =>
+  client.get('/events', {
+    ...(token && { headers: { 'x-auth-token': token } }),
+  });
 
 interactApi.searchEvents = (q, cancelToken) =>
   client.get('/events/search', {

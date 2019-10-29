@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default function Alert({ msg }) {
+export default function Alert({ msg = '' }) {
   return (
-    <div style={styles.wrapper}>
-      <p>{msg}</p>
+    <div style={{ ...styles.wrapper, ...(msg.length === 0 && styles.hidden) }}>
+      <p style={styles.msg}>{msg}</p>
     </div>
   );
 }
@@ -11,5 +11,16 @@ export default function Alert({ msg }) {
 const styles = {
   wrapper: {
     padding: '12px 16px',
+    backgroundColor: 'var(--danger)',
+    borderRadius: '4px',
+    fontWeight: '500',
+  },
+  msg: {
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+  },
+  hidden: {
+    display: 'none',
   },
 };

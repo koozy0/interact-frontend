@@ -98,7 +98,6 @@ export default connect(
 const styles = {
   header: {
     textAlign: 'center',
-    marginBottom: '48px',
   },
   form: {
     width: '100%',
@@ -107,6 +106,7 @@ const styles = {
   },
   inputGrp: {
     marginBottom: '32px',
+    marginTop: '16px',
   },
   label: {
     display: 'block',
@@ -127,8 +127,8 @@ const styles = {
     border: '0',
     display: 'block',
     width: '100%',
-    backgroundColor: '#41EAD4',
-    color: '#3a3335',
+    backgroundColor: 'var(--success)',
+    color: 'var(--dark)',
     cursor: 'pointer',
     marginTop: '64px',
     outline: 'none',

@@ -40,7 +40,7 @@ export default connect(
 const styles = {
   navbar: {
     alignItems: 'center',
-    color: '#FAFAFF',
+    color: 'var(--light)',
     display: 'flex',
     height: '64px',
     justifyContent: 'center',
@@ -58,5 +58,9 @@ const styles = {
     justifyContent: 'center',
     width: '50px',
   },
-  title: { fontSize: '20px', fontWeight: '500', color: '#41EAD4' },
+  title: {
+    fontSize: '20px',
+    fontWeight: '500',
+    color: 'var(--success)',
+  },
 };

@@ -41,7 +41,7 @@ const styles = {
     boxShadow: '0 5px 15px 0 rgba(0, 0, 0, 0.87)',
     outline: 'none',
     lineHeight: '24px',
-    backgroundColor: '#FAFAFF',
+    backgroundColor: 'var(--light)',
   },
   searchboxAside: {
     height: '36px',
@@ -56,12 +56,12 @@ const styles = {
   searchboxAsideLeft: {
     left: '16px',
     top: '10px',
-    color: '#3a3335',
+    color: 'var(--dark)',
     fontSize: '16px',
   },
   searchboxAsideRight: {
     right: '16px',
     top: '10px',
-    backgroundColor: '#41EAD4',
+    backgroundColor: 'var(--success)',
   },
 };

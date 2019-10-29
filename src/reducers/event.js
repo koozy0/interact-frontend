@@ -44,10 +44,6 @@ export default function(state = initialState, action) {
       };
 
     case GET_EVENTS:
-      return {
-        ...state,
-      };
-
     case SEARCH_EVENTS:
       return {
         ...state,

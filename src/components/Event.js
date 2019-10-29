@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import Question from './Question';
 
 export class Event extends Component {
@@ -59,7 +60,7 @@ const styles = {
   textareaWrapper: { position: 'relative' },
   textareaIcon: {
     alignItems: 'center',
-    color: '#41EAD4',
+    color: 'var(--success)',
     display: 'flex',
     height: '36px',
     justifyContent: 'center',
@@ -96,6 +97,6 @@ const styles = {
     color: 'inherit',
   },
   option: {
-    color: '#3a3335',
+    color: 'var(--dark)',
   },
 };

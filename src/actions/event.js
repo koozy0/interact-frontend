@@ -26,9 +26,13 @@ export const eventsLoading = () => {
 export const getEvents = () => dispatch => {
   dispatch(eventsLoading);
 
-  return {
-    type: GET_EVENTS,
-  };
+  const token = localStorage.getItem('token');
+  interactApi.getEvents(token).then(res => {
+    dispatch({
+      type: GET_EVENTS,
+      payload: res.data,
+    });
+  });
 };
 
 export const searchEvents = q => dispatch => {
