@@ -17,7 +17,10 @@ export default function(state = initialState, action) {
 
     case GET_ERRORS:
       return {
-        data: action.payload.data,
+        data:
+          typeof action.payload.data === 'string'
+            ? { msg: action.payload.data }
+            : action.payload.data,
         status: action.payload.status,
         id: action.payload.id,
       };

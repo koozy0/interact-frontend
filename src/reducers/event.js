@@ -1,8 +1,10 @@
 import {
   CLEAR_EVENTS,
   CREATE_EVENT,
+  CREATE_EVENT_SUCCESS,
   DELETE_EVENT,
   EVENTS_LOADING,
+  EVENT_ERROR,
   GET_EVENT,
   GET_EVENTS,
   SEARCH_EVENTS,
@@ -11,7 +13,9 @@ import {
 
 const initialState = {
   events: [],
-  loading: false,
+  isLoading: false,
+  isCreated: false,
+  selected: null,
 };
 
 export default function(state = initialState, action) {
@@ -25,6 +29,13 @@ export default function(state = initialState, action) {
     case CREATE_EVENT:
       return {
         ...state,
+        isCreated: false,
+      };
+
+    case CREATE_EVENT_SUCCESS:
+      return {
+        ...state,
+        isCreated: true,
       };
 
     case DELETE_EVENT:
@@ -35,7 +46,13 @@ export default function(state = initialState, action) {
     case EVENTS_LOADING:
       return {
         ...state,
-        loading: true,
+        isLoading: true,
+      };
+
+    case EVENT_ERROR:
+      return {
+        events: [],
+        isLoading: false,
       };
 
     case GET_EVENT:
@@ -48,7 +65,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         events: action.payload,
-        loading: false,
+        isLoading: false,
       };
 
     case UPDATE_EVENT:

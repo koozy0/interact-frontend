@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 
+import Alert from '../Alert';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { createEvent } from '../../actions/event';
+
 class CreateEvent extends Component {
   state = {
     createdBy: null,
@@ -15,63 +20,103 @@ class CreateEvent extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    console.log(this.state);
+    const payload = { ...this.state, createdBy: this.props.user.id };
+    this.props.createEvent(payload);
   };
 
   render() {
+    const errMsg = this.props.error.data.msg || '';
+    const isCreated = this.props.event.isCreated;
+
     return (
       <div className='container'>
-        <h1 style={styles.header}>Create Event</h1>
+        <div className='content'>
+          <div style={styles.wrapper}>
+            <div style={styles.heading} className='mb-3'>
+              <h1>Create Event</h1>
 
-        <form style={styles.form} onSubmit={this.onSubmit}>
-          <div className='input-grp'>
-            <label htmlFor='name'>Event Name</label>
-            <input id='name' name='name' type='text' onChange={this.onChange} />
+              <Link to='/admin' className='btn btn-primary'>
+                Back
+              </Link>
+            </div>
+
+            <form onSubmit={this.onSubmit}>
+              <Alert msg={errMsg} color='danger' visible={errMsg} />
+              <Alert msg='Event Created!' color='success' visible={isCreated} />
+
+              <div className='input-grp'>
+                <label htmlFor='name'>Event Name</label>
+                <input
+                  id='name'
+                  name='name'
+                  type='text'
+                  onChange={this.onChange}
+                />
+              </div>
+
+              <div className='input-grp'>
+                <label htmlFor='code'>Event Code</label>
+                <input
+                  id='code'
+                  name='code'
+                  type='text'
+                  onChange={this.onChange}
+                />
+              </div>
+
+              <div className='input-grp'>
+                <label htmlFor='start'>Event Start</label>
+                <input
+                  id='start'
+                  name='start'
+                  type='datetime-local'
+                  onChange={this.onChange}
+                />
+              </div>
+
+              <div className='input-grp'>
+                <label htmlFor='end'>Event End</label>
+                <input
+                  id='end'
+                  name='end'
+                  type='datetime-local'
+                  onChange={this.onChange}
+                />
+              </div>
+
+              <button type='submit' className='btn btn-primary w-100 mt-3'>
+                Create Event
+              </button>
+            </form>
           </div>
-
-          <div className='input-grp'>
-            <label htmlFor='code'>Event Code</label>
-            <input id='code' name='code' type='text' onChange={this.onChange} />
-          </div>
-
-          <div className='input-grp'>
-            <label htmlFor='start'>Event Start</label>
-            <input
-              id='start'
-              name='start'
-              type='datetime-local'
-              onChange={this.onChange}
-            />
-          </div>
-
-          <div className='input-grp'>
-            <label htmlFor='end'>Event End</label>
-            <input
-              id='end'
-              name='end'
-              type='datetime-local'
-              onChange={this.onChange}
-            />
-          </div>
-
-          <button type='submit' className='btn btn-primary w-100 mt-3'>
-            Create Event
-          </button>
-        </form>
+        </div>
       </div>
     );
   }
 }
 
-export default CreateEvent;
+const mapStateToProps = state => ({
+  error: state.error,
+  event: state.event,
+  user: state.user.user,
+});
+
+const mapDispatchToProps = { createEvent };
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(CreateEvent);
 
 const styles = {
-  header: {
-    padding: '0 16px',
-    textAlign: 'center',
+  heading: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
-  form: {
-    width: '30em',
+  wrapper: {
+    width: '100%',
+    maxWidth: '30em',
     margin: '0 auto',
   },
 };

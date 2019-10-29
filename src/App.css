@@ -5,8 +5,32 @@
   position: relative;
 }
 
-.on-hover-highlight:hover {
-  background-color: rgba(255, 255, 255, 0.5);
+.autocomplete-form:not(:focus-within) .autocomplete-list {
+  visibility: hidden;
+}
+
+.autocomplete-list {
+  position: absolute;
+  margin-top: 4px;
+  margin-bottom: 0;
+  list-style-type: none;
+  width: 100%;
+  padding: 0;
+  max-height: 25vh;
+  overflow: auto;
+  z-index: 100;
+  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.87);
+  transition: all 500ms;
+}
+
+.autocomplete-list-item {
+  padding: 8px 48px;
+  user-select: none;
+  cursor: pointer;
+}
+
+.autocomplete-list-item:hover {
+  background: rgba(255, 255, 255, 0.5);
 }
 
 /* Rules for sizing the icon. */

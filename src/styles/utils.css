@@ -1,3 +1,14 @@
 .container {
   margin: 20px;
 }
+
+.content {
+  width: 100%;
+  max-width: 50em;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.d-block {
+  display: block;
+}

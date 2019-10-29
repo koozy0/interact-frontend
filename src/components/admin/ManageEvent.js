@@ -15,11 +15,15 @@ class ManageEvent extends Component {
 
     return (
       <div className='container'>
-        <h1 style={styles.header}>Manage Events</h1>
-        <div style={styles.wrapper}>
-          <Link to='/admin' className='btn btn-primary mb-3'>
-            Back
-          </Link>
+        <div className='content'>
+          <div style={styles.heading} className='mb-3'>
+            <h1>Manage Events</h1>
+
+            <Link to='/admin' className='btn btn-primary'>
+              Back
+            </Link>
+          </div>
+
           {events.map(evt => (
             <EventItem {...evt} key={evt._id} />
           ))}
@@ -41,10 +45,9 @@ export default connect(
 )(ManageEvent);
 
 const styles = {
-  header: {
-    padding: '0 16px',
-  },
-  wrapper: {
-    padding: '0 16px',
+  heading: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
 };

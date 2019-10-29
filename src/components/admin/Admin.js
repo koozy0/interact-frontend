@@ -12,21 +12,23 @@ class Admin extends Component {
   render() {
     return (
       <div className='container'>
-        <h1 style={styles.header}>Admin</h1>
-        <p style={styles.msg}>Welcome {this.props.user.name}.</p>
-        <ul style={styles.list}>
-          <li style={styles.listItem}>
-            <Link to='/events/manage'>Manage Events</Link>
-          </li>
-          <li style={styles.listItem}>
-            <Link to='/events/create'>Create Event</Link>
-          </li>
-          <li style={styles.listItem}>
-            <Link to='/' onClick={this.logout}>
-              Logout
-            </Link>
-          </li>
-        </ul>
+        <div className='content'>
+          <h1 className='mb-3'>Admin</h1>
+          <p>Welcome {this.props.user.name}.</p>
+          <ul>
+            <li style={styles.listItem}>
+              <Link to='/events/manage'>Manage Events</Link>
+            </li>
+            <li style={styles.listItem}>
+              <Link to='/events/create'>Create Event</Link>
+            </li>
+            <li style={styles.listItem}>
+              <Link to='/' onClick={this.logout}>
+                Logout
+              </Link>
+            </li>
+          </ul>
+        </div>
       </div>
     );
   }
@@ -44,19 +46,9 @@ export default connect(
 )(Admin);
 
 const styles = {
-  header: {
-    padding: '0 16px',
-  },
-  msg: {
-    padding: '4px 16px',
-    fontSize: '16px',
-  },
-  list: {
-    margin: '16px',
-  },
   listItem: {
     textDecoration: 'underline',
-    padding: '4px 16px',
+    padding: '4px 8px',
     fontSize: '16px',
   },
 };

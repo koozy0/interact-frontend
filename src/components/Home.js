@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
-import { clearEvents, getEvents, searchEvents } from '../actions/event';
+import { clearEvents, searchEvents } from '../actions/event';
 
-import AutocompleteItem from './AutocompleteItem';
+import Autocomplete from './Autocomplete';
 import PropTypes from 'prop-types';
-import Searchbox from './Searchbox';
 import axios from 'axios';
 import { connect } from 'react-redux';
 
 class Home extends Component {
+  state = {
+    searchTerm: '',
+  };
+
   // TODO: debounce the onChange event handler to prevent excessive requests
-  onInputChange = e => {
+  onChange = e => {
     const searchTerm = e.currentTarget.value;
 
     // Cancel the previous request
@@ -26,6 +29,21 @@ class Home extends Component {
     } else {
       this.props.clearEvents();
     }
+
+    this.setState({ searchTerm });
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
+    this.props.clearEvents();
+    const { searchTerm } = this.state;
+    // get event
+    // if event is found change page else show error
+    this.props.history.push(`/events/${searchTerm}`);
+  };
+
+  onSelect = suggestion => {
+    console.log(suggestion);
   };
 
   clearEventsOnSelect = () => {
@@ -33,22 +51,18 @@ class Home extends Component {
   };
 
   render() {
-    const { events } = this.props.event;
+    const { events, isLoading } = this.props.event;
 
     return (
       <div style={styles.home}>
         <div style={styles.formWrapper}>
-          <Searchbox onInputChange={this.onInputChange} />
-          <ul style={styles.autocompleteWrapper}>
-            {events.map(evt => (
-              <AutocompleteItem
-                key={evt._id}
-                name={evt.name}
-                code={evt.code}
-                clearEventsOnSelect={this.clearEventsOnSelect}
-              />
-            ))}
-          </ul>
+          <Autocomplete
+            suggestions={events}
+            isLoading={isLoading}
+            onChange={this.onChange}
+            onSubmit={this.onSubmit}
+            onSelect={this.onSelect}
+          />
         </div>
       </div>
     );
@@ -57,7 +71,6 @@ class Home extends Component {
 
 Home.propTypes = {
   clearEvents: PropTypes.func.isRequired,
-  getEvents: PropTypes.func.isRequired,
   searchEvents: PropTypes.func.isRequired,
   event: PropTypes.object.isRequired,
 };
@@ -66,7 +79,7 @@ const mapStateToProps = state => ({
   event: state.event,
 });
 
-const mapDispatchToProps = { clearEvents, getEvents, searchEvents };
+const mapDispatchToProps = { clearEvents, searchEvents };
 
 export default connect(
   mapStateToProps,
@@ -80,7 +93,7 @@ const styles = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: '100%',
-    padding: '0 16px',
+    padding: '0 32px',
   },
   formWrapper: {
     width: '100%',
