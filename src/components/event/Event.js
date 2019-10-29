@@ -17,6 +17,7 @@ export class Event extends Component {
     }
 
     // open socket connection here
+    // join room for the event
     // if received message that new question has been created, fetch event again to get question data
   }
 
@@ -32,7 +33,7 @@ export class Event extends Component {
       question,
     });
 
-    // emit a message here to notify subscribers that a new question has been created
+    // emit a message to room to notify subscribers that a new question has been created
   };
 
   render() {
