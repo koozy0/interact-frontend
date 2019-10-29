@@ -3,13 +3,13 @@ import {
   CLEAR_SELECTED,
   CREATE_EVENT,
   CREATE_EVENT_SUCCESS,
-  DELETE_EVENT,
+  CREATE_QUESTION,
+  CREATE_QUESTION_SUCCESS,
   EVENTS_LOADING,
   EVENT_ERROR,
   GET_EVENT,
   GET_EVENTS,
   SEARCH_EVENTS,
-  UPDATE_EVENT,
 } from './types';
 import { clearErrors, returnErrors } from './error';
 
@@ -137,5 +137,35 @@ export const createEvent = payload => async dispatch => {
 
     dispatch(returnErrors(data, status));
     dispatch({ type: EVENT_ERROR });
+  }
+};
+
+export const createQuestion = (eventCode, payload) => async dispatch => {
+  // Create Event
+  dispatch({
+    type: CREATE_QUESTION,
+  });
+
+  // Clear errors
+  dispatch(clearErrors());
+
+  // Create Event
+  try {
+    const res = await interactApi.createQuestion(eventCode, payload);
+
+    dispatch({
+      type: CREATE_QUESTION_SUCCESS,
+      payload: res.data,
+    });
+  } catch (err) {
+    const data = (err.response && err.response.data) || {
+      msg: err.message,
+    };
+    const status = (err.response && err.response.status) || null;
+
+    dispatch(returnErrors(data, status));
+    dispatch({
+      type: EVENT_ERROR,
+    });
   }
 };

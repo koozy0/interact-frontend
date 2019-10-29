@@ -33,4 +33,16 @@
   background: rgba(255, 255, 255, 0.5);
 }
 
+.question-form .question-form-footer {
+  margin-top: 2px;
+  overflow: hidden;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: row;
+}
+
+.question-form:not(:focus-within) .question-form-footer {
+  display: none;
+}
+
 /* Rules for sizing the icon. */

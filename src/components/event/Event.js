@@ -1,9 +1,43 @@
 import React, { Component } from 'react';
+import { createQuestion, getEvent } from '../../actions/event';
 
 import Question from './Question';
+import { connect } from 'react-redux';
 
 export class Event extends Component {
+  state = {
+    author: '',
+    question: '',
+    sortBy: 'popular',
+  };
+
+  componentDidMount() {
+    if (!this.props.event.selected) {
+      this.props.getEvent(this.props.match.params.eventCode);
+    }
+
+    // open socket connection here
+    // if received message that new question has been created, fetch event again to get question data
+  }
+
+  onChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
+    const { author, question } = this.state;
+    this.props.createQuestion(this.props.match.params.eventCode, {
+      author,
+      question,
+    });
+
+    // emit a message here to notify subscribers that a new question has been created
+  };
+
   render() {
+    const { questions = [] } = this.props.event.selected || {};
+
     return (
       <div className='container'>
         <div style={styles.section}>
@@ -15,19 +49,39 @@ export class Event extends Component {
               <div style={styles.textareaIcon}>
                 <i className='material-icons'>add_comment</i>
               </div>
-              <textarea
-                style={styles.textarea}
-                rows='1'
-                placeholder='Type your question'
-              />
+              <form onSubmit={this.onSubmit} className='question-form'>
+                <textarea
+                  style={styles.textarea}
+                  rows='1'
+                  placeholder='Type your question'
+                  name='question'
+                  onChange={this.onChange}
+                />
+                <div className='question-form-footer'>
+                  <input
+                    type='text'
+                    placeholder='Your name (optional)'
+                    name='author'
+                    style={styles.authorInput}
+                    onChange={this.onChange}
+                  />
+                  <button type='submit' style={styles.askQuestionButton}>
+                    Ask question
+                  </button>
+                </div>
+              </form>
             </div>
           </section>
 
-          <section style={{ marginTop: '12px' }}>
+          <section style={{ marginTop: '16px' }}>
             <div style={styles.subheaderWrapper}>
-              <p>5 questions</p>
+              <p>{questions.length} questions</p>
               <div style={styles.spacer} />
-              <select style={styles.select} value='popular'>
+              <select
+                style={styles.select}
+                name='sortBy'
+                onChange={this.onChange}
+              >
                 <option style={styles.option} value='popular'>
                   Popular
                 </option>
@@ -37,11 +91,11 @@ export class Event extends Component {
               </select>
             </div>
 
-            <Question />
-            <Question />
-            <Question />
-            <Question />
-            <Question />
+            <div>
+              {questions.map(question => (
+                <Question key={question._id} {...question} />
+              ))}
+            </div>
           </section>
         </div>
       </div>
@@ -49,7 +103,19 @@ export class Event extends Component {
   }
 }
 
-export default Event;
+const mapStateToProps = state => ({
+  event: state.event,
+});
+
+const mapDispatchToProps = {
+  getEvent,
+  createQuestion,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Event);
 
 const styles = {
   section: {
@@ -81,7 +147,7 @@ const styles = {
     marginBottom: '-6px',
   },
   subheaderWrapper: {
-    padding: '16px 20px',
+    padding: '8px 20px',
     display: 'flex',
     alignItems: 'center',
     fontWeight: '500',
@@ -98,5 +164,20 @@ const styles = {
   },
   option: {
     color: 'var(--dark)',
+  },
+  authorInput: {
+    height: '36px',
+    border: '0',
+    flex: '1',
+    outline: 'none',
+    padding: '0 60px',
+  },
+  askQuestionButton: {
+    height: '36px',
+    border: '0',
+    outline: 'none',
+    backgroundColor: 'var(--primary)',
+    color: 'var(--dark)',
+    padding: '0 16px',
   },
 };

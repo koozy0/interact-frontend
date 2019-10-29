@@ -3,6 +3,8 @@ import {
   CLEAR_SELECTED,
   CREATE_EVENT,
   CREATE_EVENT_SUCCESS,
+  CREATE_QUESTION,
+  CREATE_QUESTION_SUCCESS,
   DELETE_EVENT,
   EVENTS_LOADING,
   EVENT_ERROR,
@@ -43,6 +45,17 @@ export default function(state = initialState, action) {
       return {
         ...state,
         isCreated: true,
+      };
+
+    case CREATE_QUESTION:
+      return {
+        ...state,
+      };
+
+    case CREATE_QUESTION_SUCCESS:
+      return {
+        ...state,
+        selected: action.payload,
       };
 
     case DELETE_EVENT:

@@ -35,6 +35,9 @@ interactApi.createEvent = (token, { createdBy, name, code, start, end }) =>
     },
   );
 
+interactApi.createQuestion = (eventCode, { author, question }) =>
+  client.post(`/events/${eventCode}/questions`, { author, question });
+
 // users
 interactApi.getUser = token =>
   client.get(`/auth/user`, {

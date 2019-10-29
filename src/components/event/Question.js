@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 
+import moment from 'moment';
+
 export class Question extends Component {
   render() {
+    const { author, question, upvotes, downvotes, createdAt } = this.props;
+
     return (
       <div style={styles.question}>
         <div style={styles.headerWrapper}>
@@ -12,33 +16,24 @@ export class Question extends Component {
           </div>
           <div style={styles.titleWrapper}>
             <div style={styles.titles}>
-              <p style={{ ...styles.title, ...styles.trucateText }}>
-                Anonymous
-              </p>
+              <p style={{ ...styles.title, ...styles.trucateText }}>{author}</p>
               <small style={{ ...styles.subtitle, ...styles.trucateText }}>
-                {new Date()
-                  .toJSON()
-                  .slice(0, 10)
-                  .replace(/-/g, '/')}
+                {moment(createdAt).format('dddd, DD-MM-YYYY, hh:mm:ss A')}
               </small>
             </div>
             <div style={styles.votes}>
               <button style={{ ...styles.socialIcon, ...styles.upvote }}>
-                <span style={styles.voteCount}>0</span>
+                <span style={styles.voteCount}>{upvotes}</span>
                 <i className='material-icons md-18'>thumb_up</i>
               </button>
               <button style={{ ...styles.socialIcon, ...styles.downvote }}>
-                <span style={styles.voteCount}>0</span>
+                <span style={styles.voteCount}>{downvotes}</span>
                 <i className='material-icons md-18'>thumb_down</i>
               </button>
             </div>
           </div>
         </div>
-        <div style={styles.content}>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestiae
-          laboriosam ut impedit a dicta. Atque labore et sunt, natus ipsam fugit
-          hic sed temporibus accusamus, aut doloremque perferendis quasi odit.
-        </div>
+        <div style={styles.content}>{question}</div>
       </div>
     );
   }
