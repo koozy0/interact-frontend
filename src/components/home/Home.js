@@ -4,9 +4,9 @@ import {
   clearSelected,
   getEvent,
   searchEvents,
-} from '../actions/event';
+} from '../../actions/event';
 
-import Alert from './Alert';
+import Alert from '../Alert';
 import Autocomplete from './Autocomplete';
 import PropTypes from 'prop-types';
 import axios from 'axios';

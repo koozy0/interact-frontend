@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Spinner from './Spinner';
+import Spinner from '../Spinner';
 import moment from 'moment';
 
 export const AutcompleteListItem = ({ name, code, start, end, onSelect }) => {
