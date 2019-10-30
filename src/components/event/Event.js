@@ -83,10 +83,10 @@ export class Event extends Component {
                 name='sortBy'
                 onChange={this.onChange}
               >
-                <option style={styles.option} value='popular'>
+                <option style={styles.option} value='popularity'>
                   Popular
                 </option>
-                <option style={styles.option} value='created'>
+                <option style={styles.option} value='createdAt'>
                   Created
                 </option>
               </select>
