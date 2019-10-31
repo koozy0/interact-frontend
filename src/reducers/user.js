@@ -9,34 +9,43 @@ import {
 
 const initialState = {
   token: localStorage.getItem('token'),
-  isAuthenticated: null,
+  isAuthenticated: false,
   isLoading: false,
-  isAdmin: null,
   user: null,
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
     case AUTH_ERROR:
-    case LOGIN_FAILURE:
-    case LOGOUT_SUCCESS:
       return {
-        ...state,
         token: null,
         isAuthenticated: false,
         isLoading: false,
-        isAdmin: null,
+        user: null,
+      };
+
+    case LOGIN_FAILURE:
+      return {
+        token: null,
+        isAuthenticated: false,
+        isLoading: false,
         user: null,
       };
 
     case LOGIN_SUCCESS:
       return {
-        ...state,
         token: action.payload.token,
         isAuthenticated: true,
         isLoading: false,
-        isAdmin: action.payload.user.role.includes('administrator'),
         user: action.payload.user,
+      };
+
+    case LOGOUT_SUCCESS:
+      return {
+        token: null,
+        isAuthenticated: false,
+        isLoading: false,
+        user: null,
       };
 
     case USER_LOADED:
@@ -44,8 +53,7 @@ export default function(state = initialState, action) {
         ...state,
         isAuthenticated: true,
         isLoading: false,
-        isAdmin: action.payload.user.role.includes('administrator'),
-        user: action.payload,
+        user: action.payload.user,
       };
 
     case USER_LOADING:
