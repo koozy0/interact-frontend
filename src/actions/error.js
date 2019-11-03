@@ -1,14 +1,14 @@
-import { CLEAR_ERRORS, GET_ERRORS } from './types';
+import { DELETE_ERRORS, UPDATE_ERRORS } from './types';
 
-export const returnErrors = (data, status, id) => {
+export const deleteErrors = (data, status, id) => {
   return {
-    type: GET_ERRORS,
-    payload: { data, status, id },
+    type: DELETE_ERRORS,
+    payload: { data, status, id }
   };
 };
 
-export const clearErrors = () => {
+export const updateErrors = () => {
   return {
-    type: CLEAR_ERRORS,
+    type: UPDATE_ERRORS
   };
 };
