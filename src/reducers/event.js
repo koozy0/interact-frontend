@@ -5,7 +5,6 @@ import {
   EVENT_LOADING,
   FETCH_EVENT,
   FETCH_EVENTS,
-  SEARCH_EVENTS,
   UPDATE_EVENT,
 } from '../actions/types';
 
@@ -48,13 +47,6 @@ export default function(state = initialState, action) {
       };
 
     case FETCH_EVENTS:
-      return {
-        ...state,
-        events: action.payload,
-        isLoading: false,
-      };
-
-    case SEARCH_EVENTS:
       return {
         ...state,
         events: action.payload,

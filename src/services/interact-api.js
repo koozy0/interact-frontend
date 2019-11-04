@@ -4,47 +4,55 @@ const BASE_URL = 'http://localhost:5000/api';
 
 const client = new ApiService({ baseURL: BASE_URL });
 
-const interactApi = {};
+const interactApi = { events: {}, questions: {}, users: {} };
 
-// events
-interactApi.getEvents = token =>
-  client.get('/events', {
-    ...(token && { headers: { 'x-auth-token': token } }),
-  });
+// Event
+interactApi.events.createEvent = (token, payload) => {
+  return client.post('/events', payload, tokenConfig(token));
+};
 
-interactApi.getEvent = eventCode => client.get(`/events/${eventCode}`);
+interactApi.events.deleteEvent = (token, eventcode) => {
+  return client.delete(`/events/${eventcode}`, tokenConfig(token));
+};
 
-interactApi.searchEvents = (q, cancelToken) =>
-  client.get('/events/search', {
-    params: { q: q.trim() },
-    ...(cancelToken && { cancelToken }),
-  });
+interactApi.events.fetchEvent = eventcode => {
+  return client.get(`/events/${eventcode}`);
+};
 
-interactApi.createEvent = (token, { createdBy, name, code, start, end }) =>
-  client.post(
-    '/events',
-    {
-      createdBy,
-      name,
-      code,
-      start,
-      end,
-    },
-    {
-      ...(token && { headers: { 'x-auth-token': token } }),
-    },
-  );
+interactApi.events.fetchEvents = eventcode => {
+  if (eventcode) {
+    return client.get(`/events`, { params: { eventcode: eventcode.trim() } });
+  }
 
-interactApi.createQuestion = (eventCode, { author, question }) =>
-  client.post(`/events/${eventCode}/questions`, { author, question });
+  return client.get(`/events`);
+};
 
-// users
-interactApi.getUser = token =>
-  client.get(`/auth/user`, {
-    ...(token && { headers: { 'x-auth-token': token } }),
-  });
+interactApi.events.updateEvent = (token, eventcode, payload) => {
+  return client.put(`/events/${eventcode}`, payload, tokenConfig(token));
+};
 
-interactApi.login = ({ username, password }) =>
-  client.post('/auth', { username, password });
+// Question
+interactApi.questions.createQuestion = payload => {};
+
+interactApi.questions.deleteQuestion = (token, id) => {};
+
+interactApi.questions.fetchQuestions = () => {};
+
+interactApi.questions.updateQuestion = (token, id) => {};
+
+// User
+interactApi.users.login = ({ username, password }) => {
+  return client.post('/auth', { username, password });
+};
+
+interactApi.users.loadUser = token => {
+  return client.get('/auth/user', tokenConfig(token));
+};
 
 export default interactApi;
+
+function tokenConfig(token) {
+  return {
+    headers: { 'x-auth-token': token },
+  };
+}

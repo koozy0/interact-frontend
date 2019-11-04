@@ -1,8 +1,7 @@
 import {
   AUTH_ERROR,
-  LOGIN_FAILURE,
-  LOGIN_SUCCESS,
-  LOGOUT_SUCCESS,
+  USER_LOGIN,
+  USER_LOGOUT,
   USER_LOADED,
   USER_LOADING,
 } from '../actions/types';
@@ -24,15 +23,7 @@ export default function(state = initialState, action) {
         user: null,
       };
 
-    case LOGIN_FAILURE:
-      return {
-        token: null,
-        isAuthenticated: false,
-        isLoading: false,
-        user: null,
-      };
-
-    case LOGIN_SUCCESS:
+    case USER_LOGIN:
       return {
         token: action.payload.token,
         isAuthenticated: true,
@@ -40,7 +31,7 @@ export default function(state = initialState, action) {
         user: action.payload.user,
       };
 
-    case LOGOUT_SUCCESS:
+    case USER_LOGOUT:
       return {
         token: null,
         isAuthenticated: false,
