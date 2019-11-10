@@ -25,13 +25,12 @@ class ApiService {
   }
 
   handleError(error) {
+    // Do not throw error for cancelled requests
     if (axios.isCancel(error)) {
       console.log('Request cancelled:', error);
     } else {
-      console.error(error);
+      return Promise.reject(error);
     }
-
-    return Promise.reject(error);
   }
 
   get(path, config) {

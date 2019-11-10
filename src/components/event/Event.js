@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { createQuestion, getEvent } from '../../actions/event';
+import {} from '../../actions/event';
 
 import Question from './Question';
 import { connect } from 'react-redux';
@@ -13,7 +13,7 @@ export class Event extends Component {
 
   componentDidMount() {
     if (!this.props.event.selected) {
-      this.props.getEvent(this.props.match.params.eventCode);
+      // this.props.getEvent(this.props.match.params.eventCode);
     }
 
     // open socket connection here
@@ -81,8 +81,7 @@ export class Event extends Component {
               <select
                 style={styles.select}
                 name='sortBy'
-                onChange={this.onChange}
-              >
+                onChange={this.onChange}>
                 <option style={styles.option} value='popularity'>
                   Popular
                 </option>
@@ -108,10 +107,7 @@ const mapStateToProps = state => ({
   event: state.event,
 });
 
-const mapDispatchToProps = {
-  getEvent,
-  createQuestion,
-};
+const mapDispatchToProps = {};
 
 export default connect(
   mapStateToProps,

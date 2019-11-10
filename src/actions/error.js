@@ -7,8 +7,6 @@ export const deleteErrors = () => {
 };
 
 export const updateErrors = (err, id) => {
-  console.log('ERROR', err);
-
   const data = (err.response && err.response.data) || err;
   const status = (err.response && err.response.status) || null;
 

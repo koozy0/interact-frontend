@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 import EventItem from './EventItem';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getEvents } from '../../actions/event';
+import {} from '../../actions/event';
 
 class ManageEvent extends Component {
   componentDidMount() {
-    this.props.getEvents();
+    // this.props.getEvents();
   }
 
   render() {
@@ -37,7 +37,7 @@ const mapStateToProps = state => ({
   event: state.event,
 });
 
-const mapDispatchToProps = { getEvents };
+const mapDispatchToProps = {};
 
 export default connect(
   mapStateToProps,

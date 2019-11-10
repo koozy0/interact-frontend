@@ -1,7 +1,7 @@
 // events
 export const CREATE_EVENT = 'CREATE_EVENT'; // create
 export const DELETE_EVENT = 'DELETE_EVENT'; // delete
-// export const EVENT_ERROR = 'EVENT_ERROR'; // error
+export const EVENT_ERROR = 'EVENT_ERROR'; // error
 export const EVENT_LOADING = 'EVENT_LOADING'; // loading
 export const FETCH_EVENT = 'FETCH_EVENT'; // read
 export const FETCH_EVENTS = 'FETCH_EVENTS'; // read

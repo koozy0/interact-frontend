@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
 import Alert from '../Alert';
-import { clearErrors } from '../../actions/error';
+import { deleteErrors } from '../../actions/error';
 import { connect } from 'react-redux';
-import { login } from '../../actions/user';
+import {} from '../../actions/user';
 
 class AdminLogin extends Component {
   state = {
@@ -90,7 +90,7 @@ const mapStateToProps = state => ({
   error: state.error,
 });
 
-const mapDispatchToProps = { login, clearErrors };
+const mapDispatchToProps = { deleteErrors };
 
 export default connect(
   mapStateToProps,

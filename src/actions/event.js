@@ -1,6 +1,7 @@
 import {
   CREATE_EVENT,
   DELETE_EVENT,
+  EVENT_ERROR,
   EVENT_LOADING,
   FETCH_EVENT,
   FETCH_EVENTS,
@@ -26,6 +27,9 @@ export const createEvent = payload => async dispatch => {
     });
   } catch (err) {
     dispatch(updateErrors(err));
+    dispatch({
+      ype: EVENT_ERROR,
+    });
   }
 };
 
@@ -45,6 +49,9 @@ export const deleteEvent = id => async dispatch => {
     });
   } catch (err) {
     dispatch(updateErrors(err));
+    dispatch({
+      ype: EVENT_ERROR,
+    });
   }
 };
 
@@ -66,10 +73,13 @@ export const fetchEvent = eventcode => dispatch => {
     });
   } catch (err) {
     dispatch(updateErrors(err));
+    dispatch({
+      type: EVENT_ERROR,
+    });
   }
 };
 
-export const fetchEvents = eventcode => dispatch => {
+export const fetchEvents = (eventcode, cancelToken) => async dispatch => {
   // Reset error state
   dispatch(deleteErrors());
 
@@ -79,14 +89,17 @@ export const fetchEvents = eventcode => dispatch => {
   });
 
   try {
-    const events = interactApi.events.fetchEvents(eventcode);
+    const events = await interactApi.events.fetchEvents(eventcode, cancelToken);
 
     dispatch({
       type: FETCH_EVENTS,
-      payload: events,
+      payload: events.data,
     });
   } catch (err) {
     dispatch(updateErrors(err));
+    dispatch({
+      type: EVENT_ERROR,
+    });
   }
 };
 
@@ -106,5 +119,8 @@ export const updateEvent = id => async dispatch => {
     });
   } catch (err) {
     dispatch(updateErrors(err));
+    dispatch({
+      ype: EVENT_ERROR,
+    });
   }
 };

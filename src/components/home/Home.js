@@ -1,16 +1,12 @@
 import React, { Component, Fragment } from 'react';
-import {
-  clearEvents,
-  clearSelected,
-  getEvent,
-  searchEvents,
-} from '../../actions/event';
+import { fetchEvents } from '../../actions/event';
 
 import Alert from '../Alert';
 import Autocomplete from './Autocomplete';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { connect } from 'react-redux';
+const CancelToken = axios.CancelToken;
 
 class Home extends Component {
   state = {
@@ -19,34 +15,31 @@ class Home extends Component {
 
   componentDidMount() {
     // Clear selected Event
-    this.props.clearSelected();
+    // this.props.clearSelected();
   }
 
   componentDidUpdate() {
-    const { isLoading, selected } = this.props.event;
-
-    if (!isLoading && selected) {
-      this.props.history.push(`/events/${selected.code}`);
-    }
+    // const { isLoading, selected } = this.props.event;
+    // if (!isLoading && selected) {
+    //   this.props.history.push(`/events/${selected.code}`);
+    // }
   }
 
   // TODO: debounce the onChange event handler to prevent excessive requests
   onChange = e => {
     const searchTerm = e.currentTarget.value;
 
-    // Cancel the previous request
-    if (typeof this._source !== typeof undefined) {
-      this._source.cancel('Operation cancelled due to new request');
+    // Cancel the previous request if it is still pending
+    if (this._cancel) {
+      this._cancel('Request cancelled as there is a new request.');
     }
 
-    // Save the new request for cancellation
-    this._source = axios.CancelToken.source();
+    // Create the cancel token used to cancel this request if required
+    const cancelToken = new CancelToken(c => (this._cancel = c));
 
     // Only make new requests when search term is > 3 chars long
     if (searchTerm.length > 3) {
-      this.props.searchEvents(searchTerm, this._source.token);
-    } else {
-      this.props.clearEvents();
+      this.props.fetchEvents(searchTerm, cancelToken);
     }
 
     this.setState({ searchTerm });
@@ -54,20 +47,20 @@ class Home extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    this.props.clearEvents();
-    const { searchTerm } = this.state;
-    // get event
-    this.props.getEvent(searchTerm);
+    // this.props.clearEvents();
+    // const { searchTerm } = this.state;
+    // // get event
+    // this.props.getEvent(searchTerm);
   };
 
   onSelect = suggestion => {
-    const { code } = suggestion;
-    // get event
-    this.props.getEvent(code);
+    // const { code } = suggestion;
+    // // get event
+    // this.props.getEvent(code);
   };
 
   clearEventsOnSelect = () => {
-    this.props.clearEvents();
+    // this.props.clearEvents();
   };
 
   render() {
@@ -97,10 +90,7 @@ class Home extends Component {
 }
 
 Home.propTypes = {
-  clearEvents: PropTypes.func.isRequired,
-  clearSelected: PropTypes.func.isRequired,
-  getEvent: PropTypes.func.isRequired,
-  searchEvents: PropTypes.func.isRequired,
+  fetchEvents: PropTypes.func.isRequired,
   event: PropTypes.object.isRequired,
   error: PropTypes.object.isRequired,
 };
@@ -111,10 +101,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  clearEvents,
-  clearSelected,
-  getEvent,
-  searchEvents,
+  fetchEvents,
 };
 
 export default connect(

@@ -19,12 +19,19 @@ interactApi.events.fetchEvent = eventcode => {
   return client.get(`/events/${eventcode}`);
 };
 
-interactApi.events.fetchEvents = eventcode => {
+interactApi.events.fetchEvents = (eventcode, cancelToken) => {
   if (eventcode) {
-    return client.get(`/events`, { params: { eventcode: eventcode.trim() } });
+    return client.get(`/events`, {
+      cancelToken,
+      params: {
+        eventcode: eventcode.trim(),
+      },
+    });
   }
 
-  return client.get(`/events`);
+  return client.get(`/events`, {
+    cancelToken,
+  });
 };
 
 interactApi.events.updateEvent = (token, eventcode, payload) => {
