@@ -30,8 +30,7 @@ export class Autocomplete extends Component {
     const suggestionsList = (
       <ul
         className='autocomplete-list'
-        style={this.focus ? { display: 'block' } : { display: 'hidden' }}
-      >
+        style={this.focus ? { display: 'block' } : { display: 'hidden' }}>
         {suggestions.map(suggestion => {
           const { _id, name, code, start: _start, end: _end } = suggestion;
           const start = this.formatTimestamp(_start);
@@ -60,12 +59,12 @@ export class Autocomplete extends Component {
           onFocus={this.onFocus}
           onBlur={this.onBlur}
         />
+        <div style={styles.inputOverlay}></div>
         <button
           style={{
             ...styles.searchButton,
             ...(isLoading && styles.searchButtonIsLoading),
-          }}
-        >
+          }}>
           {isLoading ? (
             <Spinner />
           ) : (
@@ -84,6 +83,8 @@ export default Autocomplete;
 const styles = {
   form: {
     position: 'relative',
+    overflow: 'hidden',
+    borderRadius: '32px',
   },
   input: {
     width: '100%',
@@ -93,6 +94,22 @@ const styles = {
     border: '0',
     lineHeight: '24px',
     fontSize: '14px',
+    boxShadow: 'var(--shadow)',
+    background: 'var(--dark)',
+    position: 'relative',
+    caret: 'var(--light)',
+    color: 'var(--light)',
+  },
+  inputOverlay: {
+    borderRadius: '32px',
+    position: 'absolute',
+    top: '0',
+    left: '0',
+    right: '0',
+    bottom: '0',
+    zIndex: 100,
+    pointerEvents: 'none',
+    background: 'var(--elevation-1)',
   },
   searchButton: {
     background: 'var(--primary)',

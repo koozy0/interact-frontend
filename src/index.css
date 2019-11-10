@@ -1,11 +1,22 @@
 :root {
-  --dark: #3a3335;
-  --light: #fafaff;
-  --danger: #f52f57;
+  --dark: #121212;
+  --light: rgba(255, 255, 255, 0.87);
+  --danger: #cf6679;
   --warn: #f4d06f;
   --success: #37ff8b;
   --primary: #41ead4;
   --secondary: #51d6ff;
+  --shadow: 0 5px 10px rgba(0, 0, 0, 0.54);
+  --elevation-0: rgba(255, 255, 255, 0);
+  --elevation-1: rgba(255, 255, 255, 0.05);
+  --elevation-2: rgba(255, 255, 255, 0.07);
+  --elevation-3: rgba(255, 255, 255, 0.08);
+  --elevation-4: rgba(255, 255, 255, 0.09);
+  --elevation-5: rgba(255, 255, 255, 0.11);
+  --elevation-6: rgba(255, 255, 255, 0.12);
+  --elevation-7: rgba(255, 255, 255, 0.14);
+  --elevation-8: rgba(255, 255, 255, 0.15);
+  --elevation-9: rgba(255, 255, 255, 0.16);
 }
 
 body {
@@ -20,7 +31,7 @@ body {
 html,
 body {
   background-color: var(--dark);
-  color: #fafaff;
+  color: var(--light);
   line-height: 1.5;
   height: 100%;
   font-size: 14px;
@@ -44,6 +55,10 @@ h5,
 h6,
 p {
   margin: 0;
+}
+
+button {
+  outline: none;
 }
 
 i {

@@ -4,6 +4,8 @@ import Alert from '../Alert';
 import { deleteErrors } from '../../actions/error';
 import { connect } from 'react-redux';
 import {} from '../../actions/user';
+import Button from '../Button';
+import Input from '../Input';
 
 class AdminLogin extends Component {
   state = {
@@ -19,7 +21,8 @@ class AdminLogin extends Component {
   onSubmit = e => {
     e.preventDefault();
     const { username, password } = this.state;
-    this.props.login({ username, password });
+    console.log({ username, password });
+    // this.props.login({ username, password });
   };
 
   componentDidUpdate(prevProps) {
@@ -52,30 +55,31 @@ class AdminLogin extends Component {
               <Alert msg={errMsg} color='danger' visible={errMsg.length > 0} />
 
               <div className='input-grp'>
-                <label htmlFor='username'>Username</label>
-                <input
+                <Input
                   type='text'
                   id='username'
                   name='username'
+                  label='Username'
                   autoComplete='off'
                   onChange={this.onChange}
                 />
               </div>
 
               <div className='input-grp'>
-                <label htmlFor='password'>Password</label>
-                <input
+                <Input
                   type='password'
                   id='password'
                   name='password'
+                  label='Password'
                   autoComplete='off'
                   onChange={this.onChange}
                 />
               </div>
 
-              <button type='submit' className='btn btn-primary w-100 mt-3'>
+              <Button label='Login' type='submit' />
+              {/* <button type='submit' className='btn btn-primary w-100 mt-3'>
                 Login
-              </button>
+              </button> */}
             </form>
           </div>
         </div>
