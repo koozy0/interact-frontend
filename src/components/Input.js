@@ -1,51 +1,125 @@
 import React from 'react';
 
-const Input = ({ label, ...rest }) => (
-  <div style={styles.wrapper} className='custom-input'>
-    <span style={styles.label} className='floating-label'>
-      {label}
-    </span>
-    <input style={styles.input} {...rest} />
-    <div style={styles.overlay}></div>
+const Input = ({ label, inputType, value, ...rest }) => (
+  <div style={styles.formField} className='form-field'>
+    <div style={styles.formFieldWrapper}>
+      <div style={styles.formFieldFlex}>
+        <div style={styles.formFieldInfix}>
+          <span
+            style={styles.formFieldLabelWrapper}
+            className='form-field-label-wrapper'
+          >
+            <label
+              style={styles.formFieldLabel}
+              className={
+                value ? 'form-field-label' : 'form-field-label form-field-empty'
+              }
+            >
+              {label}
+            </label>
+          </span>
+          {inputType === 'textarea' ? (
+            <textarea style={styles.formFieldInput} {...rest}></textarea>
+          ) : (
+            <input style={styles.formFieldInput} {...rest} />
+          )}
+        </div>
+      </div>
+      <div style={styles.formFieldUnderline}>
+        <div style={styles.formFieldRipple} className='form-field-ripple'></div>
+      </div>
+    </div>
   </div>
 );
 
 export default Input;
 
 const styles = {
-  wrapper: {
+  formField: {
     position: 'relative',
-    marginTop: '32px',
-  },
-  label: {
-    position: 'absolute',
-    top: '50%',
-    left: '16px',
-    transform: 'translate(0%, -50%)',
-    transition: 'transform 350ms, font-size 350ms',
-    fontSize: '16px',
-    userSelect: 'none',
-    pointerEvents: 'none',
-  },
-  input: {
-    height: '48px',
-    outline: 'none',
-    padding: '0 16px',
-    border: '0',
-    background: 'var(--dark)',
-    color: 'var(--light)',
-    caret: 'var(--light)',
     width: '100%',
-    boxShadow: 'var(--shadow)',
-    borderRadius: '4px',
+    display: 'inline-block',
+    textAlign: 'left',
   },
-  overlay: {
+  formFieldWrapper: {
+    paddingBottom: '20px',
+    position: 'relative',
+  },
+  formFieldFlex: {
+    display: 'inline-flex',
+    alignItems: 'baseline',
+    width: '100%',
+  },
+  formFieldInfix: {
+    padding: '7px 0',
+    display: 'block',
+    position: 'relative',
+    flex: 'auto',
+    minWidth: '0',
+    width: '180px',
+    borderTop: '13.5px solid transparent',
+  },
+  formFieldInput: {
+    font: 'inherit',
+    background: '0 0',
+    backgroundColor: 'unset !important',
+    color: 'currentColor',
+    border: 'none',
+    outline: '0',
+    padding: '0',
+    margin: '0',
+    width: '100%',
+    maxWidth: '100%',
+    verticalAlign: 'bottom',
+    textAlign: 'inherit',
+  },
+  formFieldLabelWrapper: {
     position: 'absolute',
-    top: '0',
     left: '0',
-    right: '0',
-    bottom: '0',
-    background: 'var(--elevation-1)',
+    boxSizing: 'content-box',
+    width: '100%',
+    height: '100%',
+    overflow: 'hidden',
     pointerEvents: 'none',
+    top: '-13.5px',
+    paddingTop: '13.5px',
+  },
+  formFieldLabel: {
+    transform: 'perspective(100px)',
+    display: 'block',
+    position: 'absolute',
+    font: 'inherit',
+    fontSize: '16px',
+    pointerEvents: 'none',
+    width: '100%',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    transformOrigin: '0 0',
+    top: '20.5px',
+    transition:
+      'transform .4s cubic-bezier(.25,.8,.25,1), color .4s cubic-bezier(.25,.8,.25,1), width .4s cubic-bezier(.25,.8,.25,1)',
+  },
+  formFieldUnderline: {
+    height: '1px',
+    backgroundColor: 'var(--light)',
+    position: 'absolute',
+    bottom: '20px',
+    pointerEvents: 'none',
+    width: '100%',
+    transform: 'scaleY(1.0001)',
+  },
+  formFieldRipple: {
+    top: '0',
+    height: '2px',
+    overflow: 'hidden',
+    position: 'absolute',
+    left: '0',
+    width: '100%',
+    transformOrigin: '50%',
+    transform: 'scaleX(.5)',
+    opacity: '0',
+    transition: 'background-color .3s cubic-bezier(.55, 0, .55, .2)',
+    backgroundColor: 'var(--light)',
   },
 };

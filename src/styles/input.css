@@ -16,7 +16,25 @@
   background-color: var(--light);
 }
 
-.custom-input:focus-within > .floating-label {
-  transform: translate(-16px, -52px) !important;
-  font-size: 14px !important;
+.form-field .form-field-label-wrapper {
+  top: 20.5px;
+}
+
+.form-field:focus-within .form-field-label,
+.form-field .form-field-label:not(.form-field-empty) {
+  transform: translateY(-20.5px) scale(0.75) perspective(100px)
+    translateZ(0.001px) !important;
+}
+
+.form-field:focus-within .form-field-label {
+  color: var(--primary) !important;
+}
+
+.form-field:focus-within .form-field-ripple {
+  opacity: 1 !important;
+  transform: scaleX(1) !important;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+    opacity 0.1s cubic-bezier(0.25, 0.8, 0.25, 1),
+    background-color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+  background-color: var(--primary) !important;
 }

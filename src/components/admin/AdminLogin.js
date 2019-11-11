@@ -1,11 +1,12 @@
+import {} from '../../actions/user';
+
 import React, { Component } from 'react';
 
 import Alert from '../Alert';
-import { deleteErrors } from '../../actions/error';
-import { connect } from 'react-redux';
-import {} from '../../actions/user';
 import Button from '../Button';
 import Input from '../Input';
+import { connect } from 'react-redux';
+import { deleteErrors } from '../../actions/error';
 
 class AdminLogin extends Component {
   state = {
@@ -54,27 +55,25 @@ class AdminLogin extends Component {
             <form onSubmit={this.onSubmit}>
               <Alert msg={errMsg} color='danger' visible={errMsg.length > 0} />
 
-              <div className='input-grp'>
-                <Input
-                  type='text'
-                  id='username'
-                  name='username'
-                  label='Username'
-                  autoComplete='off'
-                  onChange={this.onChange}
-                />
-              </div>
+              <Input
+                type='text'
+                id='username'
+                name='username'
+                label='Username'
+                value={this.state.username}
+                autoComplete='new-password'
+                onChange={this.onChange}
+              />
 
-              <div className='input-grp'>
-                <Input
-                  type='password'
-                  id='password'
-                  name='password'
-                  label='Password'
-                  autoComplete='off'
-                  onChange={this.onChange}
-                />
-              </div>
+              <Input
+                type='password'
+                id='password'
+                name='password'
+                label='Password'
+                value={this.state.password}
+                autoComplete='new-password'
+                onChange={this.onChange}
+              />
 
               <Button label='Login' type='submit' />
               {/* <button type='submit' className='btn btn-primary w-100 mt-3'>
