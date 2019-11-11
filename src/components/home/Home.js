@@ -1,11 +1,12 @@
 import React, { Component, Fragment } from 'react';
-import { fetchEvents } from '../../actions/event';
 
 import Alert from '../Alert';
 import Autocomplete from './Autocomplete';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import { fetchEvents } from '../../actions/event';
+
 const CancelToken = axios.CancelToken;
 
 class Home extends Component {
@@ -65,7 +66,8 @@ class Home extends Component {
 
   render() {
     const { events, isLoading } = this.props.event;
-    const errMsg = this.props.error.data.msg || '';
+    const { data: err } = this.props.error;
+    const errMsg = err.message || (err.data && err.data.message) || '';
 
     return (
       <Fragment>
@@ -82,7 +84,7 @@ class Home extends Component {
         </div>
 
         <div style={styles.errorWrapper}>
-          <Alert msg={errMsg} color='danger' visible={errMsg.length > 0} />
+          {errMsg.length > 0 && <Alert msg={errMsg} color='danger' />}
         </div>
       </Fragment>
     );

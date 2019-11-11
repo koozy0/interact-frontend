@@ -1,15 +1,10 @@
 import React from 'react';
 
-export default function Alert({
-  msg = '',
-  color = 'primary',
-  visible = false,
-}) {
+export default function Alert({ msg = '', color = 'primary' }) {
   return (
     <div
       style={{
         ...styles.wrapper,
-        ...(visible && styles.visible),
         ...styles[color],
       }}
     >
@@ -23,15 +18,11 @@ const styles = {
     padding: '12px 16px',
     borderRadius: '4px',
     marginBottom: '16px',
-    display: 'none',
   },
   msg: {
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
-  },
-  visible: {
-    display: 'block',
   },
   primary: {
     backgroundColor: 'var(--primary)',
