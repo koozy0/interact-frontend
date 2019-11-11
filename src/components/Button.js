@@ -23,6 +23,7 @@ const styles = {
   },
   label: {
     fontSize: '16px',
+    userSelect: 'none',
   },
   overlay: {
     position: 'absolute',

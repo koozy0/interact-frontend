@@ -76,9 +76,6 @@ class AdminLogin extends Component {
               />
 
               <Button label='Login' type='submit' />
-              {/* <button type='submit' className='btn btn-primary w-100 mt-3'>
-                Login
-              </button> */}
             </form>
           </div>
         </div>
@@ -103,7 +100,6 @@ export default connect(
 const styles = {
   wrapper: {
     width: '100%',
-    maxWidth: '30em',
     margin: '0 auto',
   },
 };
