@@ -18,7 +18,7 @@ const styles = {
     padding: '0 16px',
     minWidth: '64px',
     background: 'var(--primary)',
-    boxShadow: 'var(--shadow)',
+    boxShadow: 'var(--shadow-2)',
     borderRadius: '4px',
   },
   label: {

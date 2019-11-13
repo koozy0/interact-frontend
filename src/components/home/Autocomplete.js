@@ -102,7 +102,7 @@ const styles = {
     border: '0',
     lineHeight: '24px',
     fontSize: '14px',
-    boxShadow: 'var(--shadow)',
+    boxShadow: 'var(--shadow-1)',
     background: 'var(--dark)',
     position: 'relative',
     caret: 'var(--light)',
@@ -145,7 +145,7 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     color: 'var(--on-primary)',
-    boxShadow: 'var(--shadow)',
+    boxShadow: 'var(--shadow-7)',
   },
   searchButtonIsLoading: {
     background: 'transparent',

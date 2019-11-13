@@ -18,7 +18,7 @@ const styles = {
     padding: '12px 16px',
     borderRadius: '4px',
     marginBottom: '16px',
-    boxShadow: 'var(--shadow)',
+    boxShadow: 'var(--shadow-1)',
   },
   msg: {
     overflow: 'hidden',

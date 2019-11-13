@@ -13,6 +13,11 @@ class AdminLogin extends Component {
     password: '',
   };
 
+  componentDidMount() {
+    // Clear errors
+    this.props.deleteErrors();
+  }
+
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };

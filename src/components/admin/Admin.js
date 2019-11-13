@@ -2,9 +2,15 @@ import React, { Component } from 'react';
 
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { deleteErrors } from '../../actions/error';
 import { userLogout } from '../../actions/user';
 
 class Admin extends Component {
+  componentDidMount() {
+    // Clear errors
+    this.props.deleteErrors();
+  }
+
   logout = () => {
     this.props.userLogout();
   };
@@ -40,7 +46,10 @@ const mapStateToProps = state => ({
   user: state.user.user,
 });
 
-const mapDispatchToProps = { userLogout };
+const mapDispatchToProps = {
+  userLogout,
+  deleteErrors,
+};
 
 export default connect(
   mapStateToProps,

@@ -5,6 +5,7 @@ import Autocomplete from './Autocomplete';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import { deleteErrors } from '../../actions/error';
 import { fetchEvents } from '../../actions/event';
 
 const CancelToken = axios.CancelToken;
@@ -15,6 +16,8 @@ class Home extends Component {
   };
 
   componentDidMount() {
+    // Clear errors
+    this.props.deleteErrors();
     // Clear selected Event
     // this.props.clearSelected();
   }
@@ -93,6 +96,7 @@ class Home extends Component {
 
 Home.propTypes = {
   fetchEvents: PropTypes.func.isRequired,
+  deleteErrors: PropTypes.func.isRequired,
   event: PropTypes.object.isRequired,
   error: PropTypes.object.isRequired,
 };
@@ -104,6 +108,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   fetchEvents,
+  deleteErrors,
 };
 
 export default connect(
