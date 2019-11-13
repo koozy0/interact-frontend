@@ -1,11 +1,18 @@
 :root {
   --dark: #121212;
-  --light: rgba(255, 255, 255, 0.87);
+  --light: #ffffff;
   --danger: #cf6679;
   --warn: #f4d06f;
   --success: #37ff8b;
-  --primary: #41ead4;
-  --secondary: #51d6ff;
+  --primary: #03dac6;
+  --secondary: #bb86fc;
+  --background: #121212;
+  --surface: #121212;
+  --on-primary: #000000;
+  --on-secondary: #000000;
+  --on-background: #ffffff;
+  --on-surface: #ffffff;
+  --on-error: #000000;
   --shadow: 0 5px 10px rgba(0, 0, 0, 0.54);
   --elevation-0: rgba(255, 255, 255, 0);
   --elevation-1: rgba(255, 255, 255, 0.05);

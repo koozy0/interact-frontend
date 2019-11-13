@@ -30,7 +30,8 @@ export class Autocomplete extends Component {
     const suggestionsList = (
       <ul
         className='autocomplete-list'
-        style={this.focus ? { display: 'block' } : { display: 'hidden' }}>
+        style={this.focus ? { display: 'block' } : { display: 'hidden' }}
+      >
         {suggestions.map(suggestion => {
           const { _id, name, code, start: _start, end: _end } = suggestion;
           const start = this.formatTimestamp(_start);
@@ -64,7 +65,8 @@ export class Autocomplete extends Component {
           style={{
             ...styles.searchButton,
             ...(isLoading && styles.searchButtonIsLoading),
-          }}>
+          }}
+        >
           {isLoading ? (
             <Spinner />
           ) : (
@@ -124,7 +126,8 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    color: 'var(--light)',
+    color: 'var(--on-primary)',
+    boxShadow: 'var(--shadow)',
   },
   searchButtonIsLoading: {
     background: 'transparent',

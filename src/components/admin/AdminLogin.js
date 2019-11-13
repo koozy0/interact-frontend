@@ -44,7 +44,8 @@ class AdminLogin extends Component {
   }
 
   render() {
-    const errMsg = this.props.error.data.msg || '';
+    const { data: err } = this.props.error;
+    const errMsg = err.message || (err.data && err.data.message) || '';
 
     return (
       <div className='container'>
@@ -52,30 +53,24 @@ class AdminLogin extends Component {
           <div style={styles.wrapper}>
             <h1 className='mb-3'>Admin Login</h1>
 
-            <form onSubmit={this.onSubmit}>
-              <Alert msg={errMsg} color='danger' visible={errMsg.length > 0} />
+            <form autoComplete='off' onSubmit={this.onSubmit}>
+              {errMsg.length > 0 && <Alert msg={errMsg} color='danger' />}
 
               <Input
                 type='text'
-                id='username'
                 name='username'
                 label='Username'
-                value={this.state.username}
-                autoComplete='new-password'
                 onChange={this.onChange}
               />
 
               <Input
                 type='password'
-                id='password'
                 name='password'
                 label='Password'
-                value={this.state.password}
-                autoComplete='new-password'
                 onChange={this.onChange}
               />
 
-              <Button label='Login' type='submit' />
+              <Button type='submit'>Login</Button>
             </form>
           </div>
         </div>

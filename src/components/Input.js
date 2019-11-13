@@ -1,36 +1,55 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const Input = ({ label, inputType, value, ...rest }) => (
-  <div style={styles.formField} className='form-field'>
-    <div style={styles.formFieldWrapper}>
-      <div style={styles.formFieldFlex}>
-        <div style={styles.formFieldInfix}>
-          <span
-            style={styles.formFieldLabelWrapper}
-            className='form-field-label-wrapper'
-          >
-            <label
-              style={styles.formFieldLabel}
-              className={
-                value ? 'form-field-label' : 'form-field-label form-field-empty'
-              }
+const Input = ({ label, inputType, ...rest }) => {
+  const [input, setInput] = useState('');
+
+  return (
+    <div style={styles.formField} className='form-field'>
+      <div style={styles.formFieldWrapper}>
+        <div style={styles.formFieldFlex}>
+          <div style={styles.formFieldInfix}>
+            <span
+              style={styles.formFieldLabelWrapper}
+              className='form-field-label-wrapper'
             >
-              {label}
-            </label>
-          </span>
-          {inputType === 'textarea' ? (
-            <textarea style={styles.formFieldInput} {...rest}></textarea>
-          ) : (
-            <input style={styles.formFieldInput} {...rest} />
-          )}
+              <label
+                style={styles.formFieldLabel}
+                className={
+                  input
+                    ? 'form-field-label'
+                    : 'form-field-label form-field-empty'
+                }
+              >
+                {label}
+              </label>
+            </span>
+            {inputType === 'textarea' ? (
+              <textarea
+                style={styles.formFieldInput}
+                autoComplete='new-password'
+                onInput={e => setInput(e.target.value)}
+                {...rest}
+              ></textarea>
+            ) : (
+              <input
+                style={styles.formFieldInput}
+                autoComplete='new-password'
+                onInput={e => setInput(e.target.value)}
+                {...rest}
+              />
+            )}
+          </div>
+        </div>
+        <div style={styles.formFieldUnderline}>
+          <div
+            style={styles.formFieldRipple}
+            className='form-field-ripple'
+          ></div>
         </div>
       </div>
-      <div style={styles.formFieldUnderline}>
-        <div style={styles.formFieldRipple} className='form-field-ripple'></div>
-      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default Input;
 

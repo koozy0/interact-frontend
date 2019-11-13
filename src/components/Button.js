@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Button = ({ label, ...rest }) => (
+const Button = ({ children, ...rest }) => (
   <button style={styles.button} {...rest}>
-    <span style={styles.label}>{label}</span>
+    <span style={styles.label}>{children}</span>
     <div style={styles.label}></div>
   </button>
 );
