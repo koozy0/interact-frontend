@@ -34,23 +34,23 @@ class ApiService {
   }
 
   get(path, config) {
-    return this.client.get(path, config);
+    return this.client.get(path, config).then(res => res.data);
   }
 
   post(path, payload, config) {
-    return this.client.post(path, payload, config);
+    return this.client.post(path, payload, config).then(res => res.data);
   }
 
   put(path, payload, config) {
-    return this.client.put(path, payload, config);
+    return this.client.put(path, payload, config).then(res => res.data);
   }
 
   patch(path, payload, config) {
-    return this.client.patch(path, payload, config);
+    return this.client.patch(path, payload, config).then(res => res.data);
   }
 
   delete(path, config) {
-    return this.client.delete(path, config);
+    return this.client.delete(path, config).then(res => res.data);
   }
 }
 

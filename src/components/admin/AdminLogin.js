@@ -1,5 +1,3 @@
-import {} from '../../actions/user';
-
 import React, { Component } from 'react';
 
 import Alert from '../Alert';
@@ -7,12 +5,12 @@ import Button from '../Button';
 import Input from '../Input';
 import { connect } from 'react-redux';
 import { deleteErrors } from '../../actions/error';
+import { userLogin } from '../../actions/user';
 
 class AdminLogin extends Component {
   state = {
     username: '',
     password: '',
-    msg: null,
   };
 
   onChange = e => {
@@ -22,23 +20,11 @@ class AdminLogin extends Component {
   onSubmit = e => {
     e.preventDefault();
     const { username, password } = this.state;
-    console.log({ username, password });
-    // this.props.login({ username, password });
+    this.props.userLogin({ username, password });
   };
 
-  componentDidUpdate(prevProps) {
-    const { error, isAuthenticated, isAdmin } = this.props;
-
-    if (error !== prevProps.error) {
-      // Check for login error
-      if (error.id === 'LOGIN_FAILURE') {
-        this.setState({ msg: error.msg.msg });
-      } else {
-        this.setState({ msg: null });
-      }
-    }
-
-    if (isAuthenticated && isAdmin) {
+  componentDidUpdate() {
+    if (this.props.isAuthenticated) {
       this.props.history.push('/admin');
     }
   }
@@ -85,7 +71,7 @@ const mapStateToProps = state => ({
   error: state.error,
 });
 
-const mapDispatchToProps = { deleteErrors };
+const mapDispatchToProps = { deleteErrors, userLogin };
 
 export default connect(
   mapStateToProps,

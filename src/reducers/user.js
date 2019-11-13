@@ -1,9 +1,9 @@
 import {
   AUTH_ERROR,
-  USER_LOGIN,
-  USER_LOGOUT,
   USER_LOADED,
   USER_LOADING,
+  USER_LOGIN,
+  USER_LOGOUT,
 } from '../actions/types';
 
 const initialState = {

@@ -13,8 +13,8 @@ import { connect } from 'react-redux';
 
 class AppRoutes extends Component {
   render() {
-    const { isAuthenticated, isAdmin } = this.props.user;
-    const isLoggedInAsAdmin = !!(isAuthenticated && isAdmin);
+    const { isAuthenticated } = this.props.user;
+    console.log(isAuthenticated);
 
     return (
       <Switch>
@@ -24,19 +24,22 @@ class AppRoutes extends Component {
 
         <PrivateRoute
           path='/admin'
-          isLoggedInAsAdmin={isLoggedInAsAdmin}
+          redirectTo='/admin/login'
+          isAllowed={isAuthenticated}
           component={Admin}
         />
 
         <PrivateRoute
           path='/events/create'
-          isLoggedInAsAdmin={isLoggedInAsAdmin}
+          redirectTo='/admin/login'
+          isAllowed={isAuthenticated}
           component={CreateEvent}
         />
 
         <PrivateRoute
           path='/events/manage'
-          isLoggedInAsAdmin={isLoggedInAsAdmin}
+          redirectTo='/admin/login'
+          isAllowed={isAuthenticated}
           component={ManageEvent}
         />
 
