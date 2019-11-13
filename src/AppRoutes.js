@@ -14,7 +14,6 @@ import { connect } from 'react-redux';
 class AppRoutes extends Component {
   render() {
     const { isAuthenticated } = this.props.user;
-    console.log(isAuthenticated);
 
     return (
       <Switch>

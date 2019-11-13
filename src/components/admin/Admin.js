@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {} from '../../actions/user';
+import { userLogout } from '../../actions/user';
 
 class Admin extends Component {
   logout = () => {
-    // this.props.logout();
+    this.props.userLogout();
   };
 
   render() {
@@ -14,7 +14,9 @@ class Admin extends Component {
       <div className='container'>
         <div className='content'>
           <h1 className='mb-3'>Admin</h1>
-          <p>Welcome {this.props.user.name}.</p>
+
+          <p>Welcome {this.props.user.name}</p>
+
           <ul>
             <li style={styles.listItem}>
               <Link to='/events/manage'>Manage Events</Link>
@@ -38,7 +40,7 @@ const mapStateToProps = state => ({
   user: state.user.user,
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = { userLogout };
 
 export default connect(
   mapStateToProps,
