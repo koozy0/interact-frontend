@@ -3,11 +3,12 @@ import React, { Component } from 'react';
 import Alert from '../Alert';
 import Button from '../Button';
 import Input from '../Input';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { deleteErrors } from '../../actions/error';
 import { userLogin } from '../../actions/user';
 
-class AdminLogin extends Component {
+class LoginAdmin extends Component {
   state = {
     username: '',
     password: '',
@@ -41,7 +42,7 @@ class AdminLogin extends Component {
     return (
       <div className='container'>
         <div className='content'>
-          <h1 className='mb-3'>Admin Login</h1>
+          <h1 className='mb-3'>Login Admin</h1>
 
           <form autoComplete='off' onSubmit={this.onSubmit}>
             {errMsg.length > 0 && <Alert msg={errMsg} color='danger' />}
@@ -59,6 +60,10 @@ class AdminLogin extends Component {
               label='Password'
               onChange={this.onChange}
             />
+
+            <Link to='/admin/create' style={styles.link} className='mt-3 mr-3'>
+              Create
+            </Link>
 
             <Button type='submit' className='mt-3'>
               Login
@@ -81,4 +86,16 @@ const mapDispatchToProps = { deleteErrors, userLogin };
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(AdminLogin);
+)(LoginAdmin);
+
+const styles = {
+  link: {
+    lineHeight: '40px',
+    padding: '0 16px',
+    height: '40px',
+    display: 'inline-block',
+    minWidth: '64px',
+    alignItems: 'flex-start',
+    fontSize: '16px',
+  },
+};
