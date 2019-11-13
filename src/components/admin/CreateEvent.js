@@ -35,50 +35,53 @@ class CreateEvent extends Component {
     return (
       <div className='container'>
         <div className='content'>
-          <div style={styles.wrapper}>
-            <div style={styles.heading} className='mb-3'>
-              <h1>Create Event</h1>
+          <div style={styles.heading} className='mb-3'>
+            <h1>Create Event</h1>
 
-              <Link to='/admin' className='btn btn-primary'>
-                Back
-              </Link>
-            </div>
-
-            <form onSubmit={this.onSubmit}>
-              {errMsg.length > 0 && <Alert msg={errMsg} color='danger' />}
-              {isCreated && <Alert msg='Event created.' color='success' />}
-
-              <Input
-                type='text'
-                name='name'
-                label='Event Name'
-                onChange={this.onChange}
-              />
-
-              <Input
-                type='text'
-                name='code'
-                label='Event Code'
-                onChange={this.onChange}
-              />
-
-              <Input
-                inputType='datetime'
-                name='start'
-                label='Event Start'
-                onChange={this.onChange}
-              />
-
-              <Input
-                inputType='datetime'
-                name='end'
-                label='Event End'
-                onChange={this.onChange}
-              />
-
-              <Button type='submit'>Create Event</Button>
-            </form>
+            <Link to='/admin' style={styles.back}>
+              <i className='material-icons' style={styles.link}>
+                arrow_back
+              </i>
+              Back
+            </Link>
           </div>
+
+          <form onSubmit={this.onSubmit}>
+            {errMsg.length > 0 && <Alert msg={errMsg} color='danger' />}
+            {isCreated && <Alert msg='Event created.' color='success' />}
+
+            <Input
+              type='text'
+              name='name'
+              label='Event Name'
+              onChange={this.onChange}
+            />
+
+            <Input
+              type='text'
+              name='code'
+              label='Event Code'
+              onChange={this.onChange}
+            />
+
+            <Input
+              inputType='datetime'
+              name='start'
+              label='Event Start'
+              onChange={this.onChange}
+            />
+
+            <Input
+              inputType='datetime'
+              name='end'
+              label='Event End'
+              onChange={this.onChange}
+            />
+
+            <Button type='submit' className='mt-3'>
+              Create Event
+            </Button>
+          </form>
         </div>
       </div>
     );
@@ -104,9 +107,10 @@ const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  wrapper: {
-    width: '100%',
-    maxWidth: '30em',
-    margin: '0 auto',
+  back: {
+    display: 'flex',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    minWidth: '64px',
   },
 };

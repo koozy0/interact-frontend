@@ -50,7 +50,14 @@ export class Autocomplete extends Component {
     );
 
     return (
-      <form className='autocomplete-form' onSubmit={onSubmit}>
+      <form
+        style={styles.form}
+        className='autocomplete-form'
+        onSubmit={onSubmit}
+      >
+        <div style={{ ...styles.searchAside, ...styles.searchAsideLeft }}>
+          #
+        </div>
         <input
           type='text'
           placeholder='enter code here...'
@@ -63,7 +70,8 @@ export class Autocomplete extends Component {
         <div style={styles.inputOverlay}></div>
         <button
           style={{
-            ...styles.searchButton,
+            ...styles.searchAside,
+            ...styles.searchAsideRight,
             ...(isLoading && styles.searchButtonIsLoading),
           }}
         >
@@ -85,8 +93,6 @@ export default Autocomplete;
 const styles = {
   form: {
     position: 'relative',
-    overflow: 'hidden',
-    borderRadius: '32px',
   },
   input: {
     width: '100%',
@@ -113,16 +119,28 @@ const styles = {
     pointerEvents: 'none',
     background: 'var(--elevation-1)',
   },
-  searchButton: {
+  searchAside: {
+    position: 'absolute',
+    width: '36px',
+    height: '36px',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    zIndex: '100',
+  },
+  searchAsideLeft: {
+    color: 'currentColor',
+    left: '10px',
+    textAlign: 'center',
+    pointerEvents: 'none',
+    lineHeight: '36px',
+    fontSize: '20px',
+  },
+  searchAsideRight: {
     background: 'var(--primary)',
     border: '0',
     padding: '0',
-    width: '36px',
-    height: '36px',
     borderRadius: '50%',
-    position: 'absolute',
-    right: '16px',
-    top: '10px',
+    right: '10px',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

@@ -36,29 +36,29 @@ class AdminLogin extends Component {
     return (
       <div className='container'>
         <div className='content'>
-          <div style={styles.wrapper}>
-            <h1 className='mb-3'>Admin Login</h1>
+          <h1 className='mb-3'>Admin Login</h1>
 
-            <form autoComplete='off' onSubmit={this.onSubmit}>
-              {errMsg.length > 0 && <Alert msg={errMsg} color='danger' />}
+          <form autoComplete='off' onSubmit={this.onSubmit}>
+            {errMsg.length > 0 && <Alert msg={errMsg} color='danger' />}
 
-              <Input
-                type='text'
-                name='username'
-                label='Username'
-                onChange={this.onChange}
-              />
+            <Input
+              type='text'
+              name='username'
+              label='Username'
+              onChange={this.onChange}
+            />
 
-              <Input
-                type='password'
-                name='password'
-                label='Password'
-                onChange={this.onChange}
-              />
+            <Input
+              type='password'
+              name='password'
+              label='Password'
+              onChange={this.onChange}
+            />
 
-              <Button type='submit'>Login</Button>
-            </form>
-          </div>
+            <Button type='submit' className='mt-3'>
+              Login
+            </Button>
+          </form>
         </div>
       </div>
     );
@@ -77,10 +77,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(AdminLogin);
-
-const styles = {
-  wrapper: {
-    width: '100%',
-    margin: '0 auto',
-  },
-};
