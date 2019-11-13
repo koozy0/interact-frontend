@@ -3,6 +3,49 @@ import React, { useState } from 'react';
 const Input = ({ label, inputType, ...rest }) => {
   const [input, setInput] = useState('');
 
+  const onInput = e => setInput(e.target.value);
+
+  const textarea = (
+    <textarea
+      style={styles.formFieldInput}
+      autoComplete='new-password'
+      onInput={onInput}
+      {...rest}
+    ></textarea>
+  );
+
+  const datetime = (
+    <input
+      type='datetime-local'
+      style={styles.datetimeInput}
+      autoComplete='new-password'
+      onInput={onInput}
+      {...rest}
+    />
+  );
+
+  const defaultInput = (
+    <input
+      style={styles.formFieldInput}
+      autoComplete='new-password'
+      onInput={onInput}
+      {...rest}
+    />
+  );
+
+  const renderInput = inputType => {
+    switch (inputType) {
+      case 'textarea':
+        return textarea;
+
+      case 'datetime':
+        return datetime;
+
+      default:
+        return defaultInput;
+    }
+  };
+
   return (
     <div style={styles.formField} className='form-field'>
       <div style={styles.formFieldWrapper}>
@@ -17,34 +60,22 @@ const Input = ({ label, inputType, ...rest }) => {
                 className={
                   input
                     ? 'form-field-label'
+                    : inputType === 'datetime'
+                    ? 'form-field-label form-field-datetime'
                     : 'form-field-label form-field-empty'
                 }
               >
                 {label}
               </label>
             </span>
-            {inputType === 'textarea' ? (
-              <textarea
-                style={styles.formFieldInput}
-                autoComplete='new-password'
-                onInput={e => setInput(e.target.value)}
-                {...rest}
-              ></textarea>
-            ) : (
-              <input
-                style={styles.formFieldInput}
-                autoComplete='new-password'
-                onInput={e => setInput(e.target.value)}
-                {...rest}
-              />
-            )}
+            {renderInput(inputType)}
           </div>
         </div>
         <div style={styles.formFieldUnderline}>
-          <div
+          <span
             style={styles.formFieldRipple}
             className='form-field-ripple'
-          ></div>
+          ></span>
         </div>
       </div>
     </div>
@@ -116,6 +147,7 @@ const styles = {
     overflow: 'hidden',
     transformOrigin: '0 0',
     top: '20.5px',
+    userSelect: 'none',
     transition:
       'transform .4s cubic-bezier(.25,.8,.25,1), color .4s cubic-bezier(.25,.8,.25,1), width .4s cubic-bezier(.25,.8,.25,1)',
   },
@@ -140,5 +172,15 @@ const styles = {
     opacity: '0',
     transition: 'background-color .3s cubic-bezier(.55, 0, .55, .2)',
     backgroundColor: 'var(--light)',
+  },
+  datetimeInput: {
+    display: 'block',
+    background: '0 0',
+    backgroundColor: 'unset !important',
+    color: 'currentColor',
+    width: '100%',
+    border: '0',
+    font: 'inherit',
+    outline: 'none',
   },
 };

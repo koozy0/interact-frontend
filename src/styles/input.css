@@ -1,5 +1,5 @@
 .input-grp {
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .input-grp > label {
@@ -10,10 +10,12 @@
 .input-grp > input {
   display: block;
   width: 100%;
-  padding: 8px 16px;
   border-radius: 4px;
   border: 0;
-  background-color: var(--light);
+  color: currentColor;
+  font: inherit;
+  background-color: unset !important;
+  outline: none;
 }
 
 .form-field .form-field-label-wrapper {
@@ -21,6 +23,7 @@
 }
 
 .form-field:focus-within .form-field-label,
+.form-field .form-field-label.form-field-datetime,
 .form-field .form-field-label:not(.form-field-empty) {
   transform: translateY(-20.5px) scale(0.75) perspective(100px)
     translateZ(0.001px) !important;

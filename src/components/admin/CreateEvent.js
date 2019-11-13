@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 
 import Alert from '../Alert';
+import Button from '../Button';
+import Input from '../Input';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createEvent } from '../../actions/event';
 
 class CreateEvent extends Component {
   state = {
-    createdBy: null,
-    name: null,
-    code: null,
-    start: null,
-    end: null,
+    createdBy: '',
+    name: '',
+    code: '',
+    start: '',
+    end: '',
   };
 
   onChange = e => {
@@ -21,11 +23,13 @@ class CreateEvent extends Component {
   onSubmit = e => {
     e.preventDefault();
     const payload = { ...this.state, createdBy: this.props.user.id };
-    this.props.createEvent(payload);
+    console.log(payload);
+    // this.props.createEvent(payload);
   };
 
   render() {
-    const errMsg = this.props.error.data.msg || '';
+    const { data: err } = this.props.error;
+    const errMsg = err.message || (err.data && err.data.message) || '';
     const isCreated = this.props.event.isCreated;
 
     return (
@@ -41,52 +45,38 @@ class CreateEvent extends Component {
             </div>
 
             <form onSubmit={this.onSubmit}>
-              <Alert msg={errMsg} color='danger' visible={errMsg} />
-              <Alert msg='Event Created!' color='success' visible={isCreated} />
+              {errMsg.length > 0 && <Alert msg={errMsg} color='danger' />}
+              {isCreated && <Alert msg='Event created.' color='success' />}
 
-              <div className='input-grp'>
-                <label htmlFor='name'>Event Name</label>
-                <input
-                  id='name'
-                  name='name'
-                  type='text'
-                  onChange={this.onChange}
-                />
-              </div>
+              <Input
+                type='text'
+                name='name'
+                label='Event Name'
+                onChange={this.onChange}
+              />
 
-              <div className='input-grp'>
-                <label htmlFor='code'>Event Code</label>
-                <input
-                  id='code'
-                  name='code'
-                  type='text'
-                  onChange={this.onChange}
-                />
-              </div>
+              <Input
+                type='text'
+                name='code'
+                label='Event Code'
+                onChange={this.onChange}
+              />
 
-              <div className='input-grp'>
-                <label htmlFor='start'>Event Start</label>
-                <input
-                  id='start'
-                  name='start'
-                  type='datetime-local'
-                  onChange={this.onChange}
-                />
-              </div>
+              <Input
+                inputType='datetime'
+                name='start'
+                label='Event Start'
+                onChange={this.onChange}
+              />
 
-              <div className='input-grp'>
-                <label htmlFor='end'>Event End</label>
-                <input
-                  id='end'
-                  name='end'
-                  type='datetime-local'
-                  onChange={this.onChange}
-                />
-              </div>
+              <Input
+                inputType='datetime'
+                name='end'
+                label='Event End'
+                onChange={this.onChange}
+              />
 
-              <button type='submit' className='btn btn-primary w-100 mt-3'>
-                Create Event
-              </button>
+              <Button type='submit'>Create Event</Button>
             </form>
           </div>
         </div>
