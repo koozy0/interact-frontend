@@ -55,7 +55,7 @@ export const deleteEvent = id => async dispatch => {
   }
 };
 
-export const fetchEvent = eventcode => dispatch => {
+export const fetchEvent = (eventcode, history) => async dispatch => {
   // Reset error state
   dispatch(deleteErrors());
 
@@ -65,12 +65,15 @@ export const fetchEvent = eventcode => dispatch => {
   });
 
   try {
-    const event = interactApi.events.fetchEvent(eventcode);
+    const event = await interactApi.events.fetchEvent(eventcode);
 
     dispatch({
       type: FETCH_EVENT,
       payload: event,
     });
+
+    // redirect to event page
+    history.push(`/events/${event.code}`);
   } catch (err) {
     dispatch(updateErrors(err));
     dispatch({
@@ -93,7 +96,7 @@ export const fetchEvents = (eventcode, cancelToken) => async dispatch => {
 
     dispatch({
       type: FETCH_EVENTS,
-      payload: events.data,
+      payload: events,
     });
   } catch (err) {
     dispatch(updateErrors(err));

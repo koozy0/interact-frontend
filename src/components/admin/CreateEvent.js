@@ -23,8 +23,7 @@ class CreateEvent extends Component {
   onSubmit = e => {
     e.preventDefault();
     const payload = { ...this.state, createdBy: this.props.user.id };
-    console.log(payload);
-    // this.props.createEvent(payload);
+    this.props.createEvent(payload);
   };
 
   render() {

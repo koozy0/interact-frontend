@@ -42,16 +42,25 @@
   /* 24dp */
   --shadow-9: 0 24px 38px 3px rgba(0, 0, 0, 0.14),
     0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 11px 15px -7px rgba(0, 0, 0, 0.2);
-  --elevation-0: rgba(255, 255, 255, 0);
-  --elevation-1: rgba(255, 255, 255, 0.05);
-  --elevation-2: rgba(255, 255, 255, 0.07);
-  --elevation-3: rgba(255, 255, 255, 0.08);
-  --elevation-4: rgba(255, 255, 255, 0.09);
-  --elevation-5: rgba(255, 255, 255, 0.11);
-  --elevation-6: rgba(255, 255, 255, 0.12);
-  --elevation-7: rgba(255, 255, 255, 0.14);
-  --elevation-8: rgba(255, 255, 255, 0.15);
-  --elevation-9: rgba(255, 255, 255, 0.16);
+  /* 0dp */
+  --elevate-0: rgb(18, 18, 18);
+  /* 1dp */
+  --elevate-1: rgb(30, 30, 30);
+  /* 2dp */
+  --elevate-2: rgb(35, 35, 35);
+  /* 3dp */
+  --elevate-3: rgb(37, 37, 37);
+  /* 4dp */
+  --elevate-4: rgb(39, 39, 39);
+  /* 6dp */
+  --elevate-5: rgb(44, 44, 44);
+  /* 8dp */
+  --elevate-6: rgb(46, 46, 46);
+  /* 12dp */
+  --elevate-7: rgb(51, 51, 51);
+  /* 16dp */
+  --elevate-8: rgb(54, 54, 54);
+  /* 24dp */
 }
 
 body {

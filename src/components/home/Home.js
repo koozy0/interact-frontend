@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { fetchEvent, fetchEvents } from '../../actions/event';
 
 import Alert from '../Alert';
 import Autocomplete from './Autocomplete';
@@ -6,7 +7,6 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { deleteErrors } from '../../actions/error';
-import { fetchEvents } from '../../actions/event';
 
 const CancelToken = axios.CancelToken;
 
@@ -18,15 +18,6 @@ class Home extends Component {
   componentDidMount() {
     // Clear errors
     this.props.deleteErrors();
-    // Clear selected Event
-    // this.props.clearSelected();
-  }
-
-  componentDidUpdate() {
-    // const { isLoading, selected } = this.props.event;
-    // if (!isLoading && selected) {
-    //   this.props.history.push(`/events/${selected.code}`);
-    // }
   }
 
   // TODO: debounce the onChange event handler to prevent excessive requests
@@ -51,10 +42,8 @@ class Home extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    // this.props.clearEvents();
-    // const { searchTerm } = this.state;
-    // // get event
-    // this.props.getEvent(searchTerm);
+    // fetch event and redirect to event page if successful
+    this.props.fetchEvent(this.state.searchTerm, this.props.history);
   };
 
   onSelect = suggestion => {
@@ -106,10 +95,7 @@ const mapStateToProps = state => ({
   error: state.error,
 });
 
-const mapDispatchToProps = {
-  fetchEvents,
-  deleteErrors,
-};
+const mapDispatchToProps = { fetchEvent, fetchEvents, deleteErrors };
 
 export default connect(
   mapStateToProps,

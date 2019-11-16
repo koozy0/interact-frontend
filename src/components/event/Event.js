@@ -1,7 +1,9 @@
-import React, { Component } from 'react';
 import {} from '../../actions/event';
 
-import Question from './Question';
+import React, { Component } from 'react';
+
+import QuestionForm from './QuestionForm';
+import QuestionList from './QuestionList';
 import { connect } from 'react-redux';
 
 export class Event extends Component {
@@ -12,26 +14,23 @@ export class Event extends Component {
   };
 
   componentDidMount() {
-    if (!this.props.event.selected) {
-      // this.props.getEvent(this.props.match.params.eventCode);
-    }
-
+    // fetch questions
     // open socket connection here
     // join room for the event
-    // if received message that new question has been created, fetch event again to get question data
   }
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  onSubmit = e => {
+  onSubmit = (question, author) => e => {
     e.preventDefault();
-    const { author, question } = this.state;
-    this.props.createQuestion(this.props.match.params.eventCode, {
-      author,
-      question,
-    });
+
+    console.log({ author, question });
+    // this.props.createQuestion(this.props.match.params.eventCode, {
+    //   author,
+    //   question,
+    // });
 
     // emit a message to room to notify subscribers that a new question has been created
   };
@@ -42,61 +41,9 @@ export class Event extends Component {
     return (
       <div className='container'>
         <div style={styles.section}>
-          <section>
-            <div style={styles.subheaderWrapper}>
-              <p>Ask the speaker</p>
-            </div>
-            <div style={styles.textareaWrapper}>
-              <div style={styles.textareaIcon}>
-                <i className='material-icons'>add_comment</i>
-              </div>
-              <form onSubmit={this.onSubmit} className='question-form'>
-                <textarea
-                  style={styles.textarea}
-                  rows='1'
-                  placeholder='Type your question'
-                  name='question'
-                  onChange={this.onChange}
-                />
-                <div className='question-form-footer'>
-                  <input
-                    type='text'
-                    placeholder='Your name (optional)'
-                    name='author'
-                    style={styles.authorInput}
-                    onChange={this.onChange}
-                  />
-                  <button type='submit' style={styles.askQuestionButton}>
-                    Ask question
-                  </button>
-                </div>
-              </form>
-            </div>
-          </section>
+          <QuestionForm onSubmit={this.onSubmit} />
 
-          <section style={{ marginTop: '16px' }}>
-            <div style={styles.subheaderWrapper}>
-              <p>{questions.length} questions</p>
-              <div style={styles.spacer} />
-              <select
-                style={styles.select}
-                name='sortBy'
-                onChange={this.onChange}>
-                <option style={styles.option} value='popularity'>
-                  Popular
-                </option>
-                <option style={styles.option} value='createdAt'>
-                  Created
-                </option>
-              </select>
-            </div>
-
-            <div>
-              {questions.map(question => (
-                <Question key={question._id} {...question} />
-              ))}
-            </div>
-          </section>
+          <QuestionList />
         </div>
       </div>
     );
@@ -127,18 +74,18 @@ const styles = {
     display: 'flex',
     height: '36px',
     justifyContent: 'center',
-    left: '12px',
+    left: '20px',
     position: 'absolute',
-    top: '16px',
+    top: '20px',
     width: '36px',
   },
   textarea: {
     border: '0',
     borderRadius: '4px',
-    fontSize: '16px',
+    fontSize: 'inherit',
     lineHeight: '24px',
     outline: 'none',
-    padding: '20px 60px',
+    padding: '24px 60px',
     resize: 'none',
     width: '100%',
     marginBottom: '-6px',

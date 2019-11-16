@@ -61,13 +61,12 @@ export class Autocomplete extends Component {
         <input
           type='text'
           placeholder='enter code here...'
-          className='autocomplete-input'
+          className='autocomplete-input z-elevate-1'
           style={styles.input}
           onChange={onChange}
           onFocus={this.onFocus}
           onBlur={this.onBlur}
         />
-        <div style={styles.inputOverlay}></div>
         <button
           style={{
             ...styles.searchAside,
@@ -102,22 +101,9 @@ const styles = {
     border: '0',
     lineHeight: '24px',
     fontSize: '14px',
-    boxShadow: 'var(--shadow-1)',
-    background: 'var(--dark)',
     position: 'relative',
     caret: 'var(--light)',
     color: 'var(--light)',
-  },
-  inputOverlay: {
-    borderRadius: '32px',
-    position: 'absolute',
-    top: '0',
-    left: '0',
-    right: '0',
-    bottom: '0',
-    zIndex: 100,
-    pointerEvents: 'none',
-    background: 'var(--elevation-1)',
   },
   searchAside: {
     position: 'absolute',
