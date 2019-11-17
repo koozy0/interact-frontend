@@ -21,7 +21,16 @@ const Question = ({ question }) => {
           <h3 style={styles.textTruncate}>{author}</h3>
           <span style={styles.textTruncate}>{createdAt}</span>
         </div>
-        <div style={styles.votes}></div>
+        <div style={styles.votes}>
+          <button style={{ ...styles.vote, ...styles.downvote }}>
+            <span className='mr-3'>{downvotes}</span>
+            <i className='material-icons'>thumb_down_alt</i>
+          </button>
+          <button style={{ ...styles.vote, ...styles.upvote }}>
+            <i className='material-icons'>thumb_up_alt</i>
+            <span className='ml-3'>{upvotes}</span>
+          </button>
+        </div>
       </div>
       <div style={styles.row} className='mt-3'>
         <div style={styles.question}>
@@ -55,5 +64,26 @@ const styles = {
   },
   headings: {
     minWidth: '0',
+  },
+  votes: {
+    display: 'flex',
+  },
+  vote: {
+    border: '1px solid rgba(255, 255, 255, .2)',
+    padding: '0 16px',
+    height: '36px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    background: 'inherit',
+    color: 'inherit',
+  },
+  upvote: {
+    borderTopRightRadius: '18px',
+    borderBottomRightRadius: '18px',
+  },
+  downvote: {
+    borderTopLeftRadius: '18px',
+    borderBottomLeftRadius: '18px',
   },
 };
