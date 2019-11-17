@@ -15,6 +15,14 @@ const QuestionForm = ({ onSubmit, isLoading }) => {
     setForm({ ...form, [name]: value });
   };
 
+  const submitAndClearForm = e => {
+    onSubmit(form.question, form.author)(e);
+    setForm({
+      question: '',
+      author: '',
+    });
+  };
+
   return (
     <section>
       <TitleBar>
@@ -22,29 +30,28 @@ const QuestionForm = ({ onSubmit, isLoading }) => {
       </TitleBar>
 
       <div style={styles.formWrapper} className='z-elevate-1'>
-        <form
-          className='question-form'
-          onSubmit={onSubmit(form.question, form.author)}
-        >
+        <form className='question-form' onSubmit={submitAndClearForm}>
           <div style={{ ...styles.flexContainer, ...styles.questionContainer }}>
-            <i style={styles.icon} className='material-icons mr-3'>
+            <i style={styles.icon} className='material-icons m-3'>
               insert_comment
             </i>
             <input
               style={styles.input}
               name='question'
+              value={form.question}
               placeholder='Type your question'
               onChange={onChange}
             ></input>
           </div>
           <div style={styles.divider}></div>
           <div style={{ ...styles.flexContainer, ...styles.authorContainer }}>
-            <i style={styles.icon} className='material-icons mr-3'>
+            <i style={styles.icon} className='material-icons m-3'>
               person
             </i>
             <input
               style={styles.input}
               name='author'
+              value={form.author}
               placeholder='Your name (optional)'
               onChange={onChange}
             ></input>

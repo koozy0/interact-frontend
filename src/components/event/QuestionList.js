@@ -17,7 +17,13 @@ const QuestionList = ({ onChange, questions }) => {
         </select>
       </TitleBar>
 
-      <div>questions goes here</div>
+      <div>
+        {questions.map(question => (
+          <Question key={question.id} question={question}>
+            test
+          </Question>
+        ))}
+      </div>
     </section>
   );
 };

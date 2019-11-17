@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import { createQuestion, fetchQuestions } from '../../actions/question';
 
 import QuestionForm from './QuestionForm';
 import QuestionList from './QuestionList';
 import { connect } from 'react-redux';
-import { createQuestion } from '../../actions/question';
 import { fetchEvent } from '../../actions/event';
 
 export class Event extends Component {
@@ -14,12 +14,9 @@ export class Event extends Component {
   };
 
   componentDidMount() {
-    // fetch event if not available
-    if (!this.props.event.event) {
-      const { eventcode } = this.props.match.params;
-      this.props.fetchEvent(eventcode);
-    }
+    const { eventId } = this.props.match.params;
     // fetch questions
+    this.props.fetchQuestions(eventId);
     // open socket connection here
     // join room for the event
   }
@@ -30,12 +27,8 @@ export class Event extends Component {
 
   onSubmit = (question, author) => e => {
     e.preventDefault();
-    console.log(this.props.event);
-    console.log({ author, question });
-    // this.props.createQuestion(this.props.match.params.eventCode, {
-    //   author,
-    //   question,
-    // });
+    const { eventId } = this.props.match.params;
+    this.props.createQuestion(eventId, { author, question });
 
     // emit a message to room to notify subscribers that a new question has been created
   };
@@ -66,6 +59,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   createQuestion,
   fetchEvent,
+  fetchQuestions,
 };
 
 export default connect(

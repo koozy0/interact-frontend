@@ -75,7 +75,7 @@ export const fetchEvent = (eventcode, history) => async dispatch => {
     // redirect if history is passed in as argument
     if (history) {
       // redirect to event page
-      history.push(`/events/${event.code}`);
+      history.push(`/events/${event._id}`);
     }
   } catch (err) {
     dispatch(updateErrors(err));

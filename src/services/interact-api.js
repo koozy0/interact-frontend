@@ -11,12 +11,12 @@ interactApi.events.createEvent = (token, payload) => {
   return client.post('/events', payload, tokenConfig(token));
 };
 
-interactApi.events.deleteEvent = (token, eventcode) => {
-  return client.delete(`/events/${eventcode}`, tokenConfig(token));
+interactApi.events.deleteEvent = (token, eventId) => {
+  return client.delete(`/events/${eventId}`, tokenConfig(token));
 };
 
-interactApi.events.fetchEvent = eventcode => {
-  return client.get(`/events/${eventcode}`);
+interactApi.events.fetchEvent = eventId => {
+  return client.get(`/events/${eventId}`);
 };
 
 interactApi.events.fetchEvents = (eventcode, cancelToken) => {
@@ -34,20 +34,22 @@ interactApi.events.fetchEvents = (eventcode, cancelToken) => {
   });
 };
 
-interactApi.events.updateEvent = (token, eventcode, payload) => {
-  return client.put(`/events/${eventcode}`, payload, tokenConfig(token));
+interactApi.events.updateEvent = (token, eventId, payload) => {
+  return client.put(`/events/${eventId}`, payload, tokenConfig(token));
 };
 
 // Question
-interactApi.questions.createQuestion = (eventcode, payload) => {
-  return client.post(`events/${eventcode}/questions`, payload);
+interactApi.questions.createQuestion = (eventId, payload) => {
+  return client.post(`events/${eventId}/questions`, payload);
 };
 
-interactApi.questions.deleteQuestion = (id, token) => {};
+interactApi.questions.deleteQuestion = (questionId, token) => {};
 
-interactApi.questions.fetchQuestions = () => {};
+interactApi.questions.fetchQuestions = eventId => {
+  return client.get(`events/${eventId}/questions`);
+};
 
-interactApi.questions.updateQuestion = (id, token) => {};
+interactApi.questions.updateQuestion = (questionId, token) => {};
 
 // User
 interactApi.users.login = ({ username, password }) => {

@@ -34,7 +34,7 @@
 }
 
 .question-form {
-  overflow: hidden;
+  overflow-y: hidden;
   transition: max-height 350ms;
   max-height: 200px;
   position: relative;
