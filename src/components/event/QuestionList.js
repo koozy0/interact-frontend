@@ -1,19 +1,20 @@
-import React, { useState } from 'react';
-
 import Question from './Question';
+import React from 'react';
 import TitleBar from '../TitleBar';
 
-const QuestionList = ({ onChange, questions }) => {
-  const [sortBy, setSortBy] = useState('');
-
+const QuestionList = ({ onSortChange, questions }) => {
   return (
     <section>
       <TitleBar>
         <span>{questions.length} questions</span>
         <div style={styles.spacer}></div>
-        <select style={styles.select} name='sortBy' onChange={onChange}>
-          <option value='popularity'>Popular</option>
-          <option value='createdAt'>Created</option>
+        <select style={styles.select} name='sortBy' onChange={onSortChange}>
+          <option style={styles.option} value='popularity'>
+            Popular
+          </option>
+          <option style={styles.option} value='createdAt'>
+            Created
+          </option>
         </select>
       </TitleBar>
 
@@ -40,5 +41,8 @@ const styles = {
     outline: 'none',
     border: '0',
     color: 'inherit',
+  },
+  option: {
+    color: 'var(--dark)',
   },
 };

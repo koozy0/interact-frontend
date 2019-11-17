@@ -17,16 +17,13 @@ export const createQuestion = (event, payload) => async dispatch => {
   // Reset error state
   dispatch(deleteErrors());
 
-  try {
-    const newQuestion = await interactApi.questions.createQuestion(
-      event,
-      payload,
-    );
+  // Questions loading
+  dispatch({
+    type: QUESTION_LOADING,
+  });
 
-    dispatch({
-      type: CREATE_QUESTION,
-      payload: newQuestion,
-    });
+  try {
+    await interactApi.questions.createQuestion(event, payload);
   } catch (err) {
     dispatch(updateErrors(err));
     dispatch({
@@ -63,7 +60,12 @@ export const fetchQuestions = eventId => async dispatch => {
 
 export const updateQuestion = question => async dispatch => {};
 
-export const questionCreated = question => async dispatch => {};
+export const questionCreated = question => dispatch => {
+  dispatch({
+    type: QUESTION_CREATED,
+    payload: question,
+  });
+};
 
 export const questionDeleted = id => async dispatch => {};
 

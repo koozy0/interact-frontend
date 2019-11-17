@@ -1,28 +1,31 @@
 import React, { Component } from 'react';
-import { createQuestion, fetchQuestions } from '../../actions/question';
+import {
+  createQuestion,
+  fetchQuestions,
+  questionCreated,
+} from '../../actions/question';
 
 import QuestionForm from './QuestionForm';
 import QuestionList from './QuestionList';
 import { connect } from 'react-redux';
-import { fetchEvent } from '../../actions/event';
+import openSocket from 'socket.io-client';
 
 export class Event extends Component {
-  state = {
-    author: '',
-    question: '',
-    sortBy: 'popular',
-  };
-
   componentDidMount() {
-    const { eventId } = this.props.match.params;
     // fetch questions
-    this.props.fetchQuestions(eventId);
+    this.props.fetchQuestions(this.props.match.params.eventId);
     // open socket connection here
-    // join room for the event
+    const socket = openSocket('http://localhost:5000');
+    // join the appropriate room
+    socket.emit('join', this.props.match.params.eventId);
+    // watch for create_question event
+    socket.on('create_question', question => {
+      this.props.questionCreated(question);
+    });
   }
 
-  onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+  onSortChange = e => {
+    console.log(e.target.value);
   };
 
   onSubmit = (question, author) => e => {
@@ -44,7 +47,10 @@ export class Event extends Component {
             isLoading={this.props.event.isLoading}
           />
 
-          <QuestionList questions={questions} />
+          <QuestionList
+            questions={questions}
+            onSortChange={this.onSortChange}
+          />
         </div>
       </div>
     );
@@ -58,8 +64,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   createQuestion,
-  fetchEvent,
   fetchQuestions,
+  questionCreated,
 };
 
 export default connect(

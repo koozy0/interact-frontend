@@ -23,7 +23,7 @@ const Question = ({ question }) => {
         </div>
         <div style={styles.votes}></div>
       </div>
-      <div style={styles.row}>
+      <div style={styles.row} className='mt-3'>
         <div style={styles.question}>
           <p className='mx-3'>{_question}</p>
         </div>
