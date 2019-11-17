@@ -11,29 +11,35 @@ import { connect } from 'react-redux';
 import openSocket from 'socket.io-client';
 
 export class Event extends Component {
+  state = {
+    sortBy: '',
+  };
+
   componentDidMount() {
     // fetch questions
     this.props.fetchQuestions(this.props.match.params.eventId);
     // open socket connection here
-    const socket = openSocket('http://localhost:5000');
+    this.socket = openSocket('http://localhost:5000');
     // join the appropriate room
-    socket.emit('join', this.props.match.params.eventId);
+    this.socket.emit('join', this.props.match.params.eventId);
     // watch for create_question event
-    socket.on('create_question', question => {
+    this.socket.on('create_question', question => {
       this.props.questionCreated(question);
     });
   }
 
+  componentWillUnmount() {
+    this.socket.disconnect();
+  }
+
   onSortChange = e => {
-    console.log(e.target.value);
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   onSubmit = (question, author) => e => {
     e.preventDefault();
     const { eventId } = this.props.match.params;
     this.props.createQuestion(eventId, { author, question });
-
-    // emit a message to room to notify subscribers that a new question has been created
   };
 
   render() {

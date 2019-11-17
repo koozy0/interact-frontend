@@ -4,9 +4,37 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 export class Navbar extends Component {
+  state = {
+    scrolled: false,
+  };
+
+  componentDidMount() {
+    // TODO: debounce the scroll event
+    window.addEventListener('scroll', e => {
+      const scrolled = window.scrollY > 30;
+      if (scrolled !== this.state.scrolled) {
+        this.onScroll(scrolled);
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll');
+  }
+
+  onScroll(scrolled) {
+    this.setState({ scrolled });
+  }
+
   render() {
     return (
-      <nav style={styles.navbar}>
+      <nav
+        style={
+          this.state.scrolled
+            ? { ...styles.navbar, ...styles.scrolled }
+            : styles.navbar
+        }
+      >
         <Link to='/'>
           <i className='material-icons' style={styles.link}>
             home
@@ -49,8 +77,14 @@ const styles = {
     top: '0',
     width: '100%',
     zIndex: '100',
+    transition: 'background 350ms',
   },
-  spacer: { flex: '1' },
+  scrolled: {
+    background: 'rgba(0, 0, 0, .54)',
+  },
+  spacer: {
+    flex: '1',
+  },
   link: {
     alignItems: 'center',
     display: 'flex',
