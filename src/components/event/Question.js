@@ -18,7 +18,10 @@ const Question = ({ question }) => {
         </div>
         <div style={{ ...styles.headings, ...styles.flexFill }}>
           <h3 style={styles.textTruncate}>{author}</h3>
-          <span style={styles.textTruncate}>{createdAt}</span>
+          <span style={styles.textTruncate}>
+            {moment(createdAt).format('MMM D, YYYY')},&nbsp;
+            {moment(createdAt).fromNow()}
+          </span>
         </div>
         <div style={styles.votes}>
           <button style={{ ...styles.vote, ...styles.downvote }}>

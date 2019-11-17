@@ -1,14 +1,13 @@
-import {} from '../../actions/event';
-
 import React, { Component } from 'react';
 
 import EventItem from './EventItem';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { fetchEvents } from '../../actions/event';
 
 class ManageEvent extends Component {
   componentDidMount() {
-    // this.props.getEvents();
+    this.props.fetchEvents();
   }
 
   render() {
@@ -41,7 +40,9 @@ const mapStateToProps = state => ({
   event: state.event,
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  fetchEvents,
+};
 
 export default connect(
   mapStateToProps,

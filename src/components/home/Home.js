@@ -46,16 +46,6 @@ class Home extends Component {
     this.props.fetchEvent(this.state.searchTerm, this.props.history);
   };
 
-  onSelect = suggestion => {
-    // const { code } = suggestion;
-    // // get event
-    // this.props.getEvent(code);
-  };
-
-  clearEventsOnSelect = () => {
-    // this.props.clearEvents();
-  };
-
   render() {
     const { events, isLoading } = this.props.event;
     const { data: err } = this.props.error;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import { Link } from 'react-router-dom';
 import Spinner from '../Spinner';
 import moment from 'moment';
 
@@ -19,17 +20,11 @@ export class Autocomplete extends Component {
     moment(timestamp).format('ddd, DD-MM-YYYY, hh:mm:ss A');
 
   render() {
-    const {
-      suggestions = [],
-      onChange,
-      onSubmit,
-      onSelect,
-      isLoading,
-    } = this.props;
+    const { suggestions, onChange, onSubmit, isLoading } = this.props;
 
     const suggestionsList = (
       <ul
-        className='autocomplete-list'
+        className='autocomplete-list z-elevate-1'
         style={this.focus ? { display: 'block' } : { display: 'hidden' }}
       >
         {suggestions.map(suggestion => {
@@ -37,13 +32,15 @@ export class Autocomplete extends Component {
           const start = this.formatTimestamp(_start);
           const end = this.formatTimestamp(_end);
           const props = { name, code, start, end };
+          const datetime = new Date().toISOString();
 
           return (
-            <AutcompleteListItem
-              {...props}
+            <Link
+              to={datetime > _start && datetime < _end ? `/events/${_id}` : ''}
               key={_id}
-              onSelect={() => onSelect(suggestion)}
-            />
+            >
+              <AutcompleteListItem {...props} />
+            </Link>
           );
         })}
       </ul>
