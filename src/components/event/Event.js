@@ -36,14 +36,14 @@ export class Event extends Component {
   };
 
   render() {
-    const { questions = [] } = this.props.event.selected || {};
+    const { questions } = this.props.question;
 
     return (
       <div className='container'>
         <div style={styles.section}>
           <QuestionForm onSubmit={this.onSubmit} />
 
-          <QuestionList />
+          <QuestionList questions={questions} />
         </div>
       </div>
     );
@@ -51,7 +51,7 @@ export class Event extends Component {
 }
 
 const mapStateToProps = state => ({
-  event: state.event,
+  question: state.question,
 });
 
 const mapDispatchToProps = {};

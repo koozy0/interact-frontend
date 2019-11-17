@@ -1,23 +1,3 @@
-.input-grp {
-  margin-bottom: 20px;
-}
-
-.input-grp > label {
-  display: inline-block;
-  margin-bottom: 8px;
-}
-
-.input-grp > input {
-  display: block;
-  width: 100%;
-  border-radius: 4px;
-  border: 0;
-  color: currentColor;
-  font: inherit;
-  background-color: unset !important;
-  outline: none;
-}
-
 .form-field .form-field-label-wrapper {
   top: 20.5px;
 }

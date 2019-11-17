@@ -24,7 +24,7 @@ export const DELETE_QUESTION = 'DELETE_QUESTION'; // delete
 export const FETCH_QUESTIONS = 'FETCH_QUESTIONS'; // read
 export const QUESTION_CREATED = 'QUESTION_CREATED'; // event => created
 export const QUESTION_DELETED = 'QUESTION_DELETED'; // event => deleted
-// export const QUESTION_ERROR = 'QUESTION_ERROR'; // error
+export const QUESTION_ERROR = 'QUESTION_ERROR'; // error
 export const QUESTION_LOADING = 'QUESTION_LOADING'; // loading
 export const QUESTION_UPDATED = 'QUESTION_UPDATED'; // event => updated
 export const UPDATE_QUESTION = 'UPDATE_QUESTION'; // update

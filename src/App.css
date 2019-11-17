@@ -33,16 +33,15 @@
   background: rgba(255, 255, 255, 0.5);
 }
 
-.question-form .question-form-footer {
-  margin-top: 2px;
+.question-form {
   overflow: hidden;
-  border-radius: 4px;
-  display: flex;
-  flex-direction: row;
+  transition: max-height 350ms;
+  max-height: 200px;
+  position: relative;
 }
 
-.question-form:not(:focus-within) .question-form-footer {
-  display: none;
+.question-form:not(:focus-within) {
+  max-height: 96px;
 }
 
 /* Rules for sizing the icon. */

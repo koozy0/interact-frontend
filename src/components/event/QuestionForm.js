@@ -20,30 +20,34 @@ const QuestionForm = ({ onSubmit }) => {
         <span>Ask the speaker</span>
       </TitleBar>
 
-      <div>
-        <form onSubmit={onSubmit(form.question, form.author)}>
-          <div style={styles.flexContainer}>
+      <div style={styles.formWrapper} className='z-elevate-1'>
+        <form
+          className='question-form'
+          onSubmit={onSubmit(form.question, form.author)}
+        >
+          <div style={{ ...styles.flexContainer, ...styles.questionContainer }}>
+            <i style={styles.icon} className='material-icons m-3'>
+              insert_comment
+            </i>
             <input
-              style={{
-                ...styles.input,
-                ...styles.question,
-              }}
+              style={styles.input}
               name='question'
               placeholder='Type your question'
               onChange={onChange}
             ></input>
           </div>
-          <div style={styles.flexContainer}>
+          <div style={styles.divider}></div>
+          <div style={{ ...styles.flexContainer, ...styles.authorContainer }}>
+            <i style={styles.icon} className='material-icons m-3'>
+              person
+            </i>
             <input
-              style={{
-                ...styles.input,
-                ...styles.author,
-              }}
+              style={styles.input}
               name='author'
               placeholder='Your name (optional)'
               onChange={onChange}
             ></input>
-            <Button>Ask!</Button>
+            <Button className='mx-3'>Ask!</Button>
           </div>
         </form>
       </div>
@@ -54,25 +58,32 @@ const QuestionForm = ({ onSubmit }) => {
 export default QuestionForm;
 
 const styles = {
+  formWrapper: {
+    borderRadius: '4px',
+  },
   input: {
     outline: 'none',
     border: '0',
-    padding: '0 64px',
-    borderRadius: '4px',
-    background: 'rgb(30, 30, 30)',
-  },
-  question: {
+    color: 'var(--light)',
+    background: 'transparent',
     flex: '1',
-    height: '64px',
+    height: '40px',
   },
   flexContainer: {
     display: 'flex',
-    marginBottom: '4px',
     position: 'relative',
+    alignItems: 'center',
   },
-  author: {
-    flex: '1',
-    marginRight: '4px',
-    height: '40px',
+  questionContainer: {
+    height: '96px',
+  },
+  authorContainer: {
+    height: '64px',
+  },
+  divider: {
+    height: '1px',
+    borderTop: '1px solid rgba(255, 255, 255, 0.10)',
+    position: 'absolute',
+    width: '100%',
   },
 };
