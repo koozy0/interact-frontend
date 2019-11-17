@@ -45,7 +45,7 @@ class AppRoutes extends Component {
           component={ManageEvent}
         />
 
-        <Route path='/events/:eventCode' component={Event} />
+        <Route path='/events/:eventcode' component={Event} />
 
         <Route component={NotFound} />
       </Switch>

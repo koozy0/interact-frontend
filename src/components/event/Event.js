@@ -1,10 +1,10 @@
-import {} from '../../actions/event';
-
 import React, { Component } from 'react';
 
 import QuestionForm from './QuestionForm';
 import QuestionList from './QuestionList';
 import { connect } from 'react-redux';
+import { createQuestion } from '../../actions/question';
+import { fetchEvent } from '../../actions/event';
 
 export class Event extends Component {
   state = {
@@ -14,6 +14,11 @@ export class Event extends Component {
   };
 
   componentDidMount() {
+    // fetch event if not available
+    if (!this.props.event.event) {
+      const { eventcode } = this.props.match.params;
+      this.props.fetchEvent(eventcode);
+    }
     // fetch questions
     // open socket connection here
     // join room for the event
@@ -25,7 +30,7 @@ export class Event extends Component {
 
   onSubmit = (question, author) => e => {
     e.preventDefault();
-
+    console.log(this.props.event);
     console.log({ author, question });
     // this.props.createQuestion(this.props.match.params.eventCode, {
     //   author,
@@ -41,7 +46,10 @@ export class Event extends Component {
     return (
       <div className='container'>
         <div style={styles.section}>
-          <QuestionForm onSubmit={this.onSubmit} />
+          <QuestionForm
+            onSubmit={this.onSubmit}
+            isLoading={this.props.event.isLoading}
+          />
 
           <QuestionList questions={questions} />
         </div>
@@ -51,10 +59,14 @@ export class Event extends Component {
 }
 
 const mapStateToProps = state => ({
+  event: state.event,
   question: state.question,
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  createQuestion,
+  fetchEvent,
+};
 
 export default connect(
   mapStateToProps,

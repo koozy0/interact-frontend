@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 
 import Button from '../Button';
+import Spinner from '../Spinner';
 import TitleBar from '../TitleBar';
 
-const QuestionForm = ({ onSubmit }) => {
+const QuestionForm = ({ onSubmit, isLoading }) => {
   const [form, setForm] = useState({
     question: '',
     author: '',
@@ -26,7 +27,7 @@ const QuestionForm = ({ onSubmit }) => {
           onSubmit={onSubmit(form.question, form.author)}
         >
           <div style={{ ...styles.flexContainer, ...styles.questionContainer }}>
-            <i style={styles.icon} className='material-icons m-3'>
+            <i style={styles.icon} className='material-icons mr-3'>
               insert_comment
             </i>
             <input
@@ -38,7 +39,7 @@ const QuestionForm = ({ onSubmit }) => {
           </div>
           <div style={styles.divider}></div>
           <div style={{ ...styles.flexContainer, ...styles.authorContainer }}>
-            <i style={styles.icon} className='material-icons m-3'>
+            <i style={styles.icon} className='material-icons mr-3'>
               person
             </i>
             <input
@@ -47,7 +48,7 @@ const QuestionForm = ({ onSubmit }) => {
               placeholder='Your name (optional)'
               onChange={onChange}
             ></input>
-            <Button className='mx-3'>Ask!</Button>
+            {isLoading ? <Spinner /> : <Button>Ask!</Button>}
           </div>
         </form>
       </div>
@@ -73,6 +74,7 @@ const styles = {
     display: 'flex',
     position: 'relative',
     alignItems: 'center',
+    padding: '0 16px',
   },
   questionContainer: {
     height: '96px',

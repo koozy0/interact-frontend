@@ -39,13 +39,15 @@ interactApi.events.updateEvent = (token, eventcode, payload) => {
 };
 
 // Question
-interactApi.questions.createQuestion = payload => {};
+interactApi.questions.createQuestion = (eventcode, payload) => {
+  return client.post(`events/${eventcode}/questions`, payload);
+};
 
-interactApi.questions.deleteQuestion = (token, id) => {};
+interactApi.questions.deleteQuestion = (id, token) => {};
 
 interactApi.questions.fetchQuestions = () => {};
 
-interactApi.questions.updateQuestion = (token, id) => {};
+interactApi.questions.updateQuestion = (id, token) => {};
 
 // User
 interactApi.users.login = ({ username, password }) => {

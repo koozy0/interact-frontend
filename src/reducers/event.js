@@ -40,7 +40,6 @@ export default function(state = initialState, action) {
       };
 
     case FETCH_EVENT:
-      console.log(action);
       return {
         ...state,
         event: action.payload,

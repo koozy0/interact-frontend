@@ -28,7 +28,7 @@ export const createEvent = payload => async dispatch => {
   } catch (err) {
     dispatch(updateErrors(err));
     dispatch({
-      ype: EVENT_ERROR,
+      type: EVENT_ERROR,
     });
   }
 };
@@ -50,7 +50,7 @@ export const deleteEvent = id => async dispatch => {
   } catch (err) {
     dispatch(updateErrors(err));
     dispatch({
-      ype: EVENT_ERROR,
+      type: EVENT_ERROR,
     });
   }
 };
@@ -72,8 +72,11 @@ export const fetchEvent = (eventcode, history) => async dispatch => {
       payload: event,
     });
 
-    // redirect to event page
-    history.push(`/events/${event.code}`);
+    // redirect if history is passed in as argument
+    if (history) {
+      // redirect to event page
+      history.push(`/events/${event.code}`);
+    }
   } catch (err) {
     dispatch(updateErrors(err));
     dispatch({
@@ -123,7 +126,7 @@ export const updateEvent = id => async dispatch => {
   } catch (err) {
     dispatch(updateErrors(err));
     dispatch({
-      ype: EVENT_ERROR,
+      type: EVENT_ERROR,
     });
   }
 };
