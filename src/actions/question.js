@@ -1,13 +1,10 @@
 import {
-  CREATE_QUESTION,
-  DELETE_QUESTION,
   FETCH_QUESTIONS,
   QUESTION_CREATED,
   QUESTION_DELETED,
   QUESTION_ERROR,
   QUESTION_LOADING,
   QUESTION_UPDATED,
-  UPDATE_QUESTION,
 } from './types';
 import { deleteErrors, updateErrors } from './error';
 
