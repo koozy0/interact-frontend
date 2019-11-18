@@ -10,11 +10,15 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Todos
 
-- Add functionality for the admin views
+- Add functionality to upvote and downvote questions
 
-- Add functionality to emit events for `update_question` and `delete_question` to the respective routes
+- Add functionality to sort questions by 'popularity' and 'createdAt'
 
-- Add functionality to log events emitted by `socket.io`
+- Add functionality to update/delete events
+
+- Add functionality to highlight questions as an admin
+
+- Add functionality to edit/delete questions as an admin
 
 - Add a Dockerfile and build Docker image
 
