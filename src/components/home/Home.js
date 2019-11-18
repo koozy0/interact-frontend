@@ -48,8 +48,6 @@ class Home extends Component {
 
   render() {
     const { events, isLoading } = this.props.event;
-    const { data: err } = this.props.error;
-    const errMsg = err.message || (err.data && err.data.message) || '';
 
     return (
       <Fragment>
@@ -66,7 +64,9 @@ class Home extends Component {
         </div>
 
         <div style={styles.errorWrapper}>
-          {errMsg.length > 0 && <Alert msg={errMsg} color='danger' />}
+          {this.props.error.message.length > 0 && (
+            <Alert msg={this.props.error.message} color='danger' />
+          )}
         </div>
       </Fragment>
     );

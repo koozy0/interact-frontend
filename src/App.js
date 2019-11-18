@@ -11,13 +11,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import store from './store';
 
 class App extends Component {
-  // componentDidMount() {
-  //   const socket = openSocket('http://localhost:5000');
-  //   socket.on('message', message => console.log(message));
-
-  //   socket.emit('client-message', 'hello this is the client');
-  // }
-
   render() {
     return (
       <Provider store={store}>

@@ -9,7 +9,6 @@ import { createEvent } from '../../actions/event';
 
 class CreateEvent extends Component {
   state = {
-    createdBy: '',
     name: '',
     code: '',
     start: '',
@@ -24,12 +23,16 @@ class CreateEvent extends Component {
     e.preventDefault();
     const payload = { ...this.state, createdBy: this.props.user.id };
     this.props.createEvent(payload);
+    this.setState({
+      name: '',
+      code: '',
+      start: '',
+      end: '',
+    });
   };
 
   render() {
-    const { data: err } = this.props.error;
-    const errMsg = err.message || (err.data && err.data.message) || '';
-    const isCreated = this.props.event.isCreated;
+    const isCreated = this.props.event.newEvent;
 
     return (
       <div className='container'>
@@ -46,13 +49,16 @@ class CreateEvent extends Component {
           </div>
 
           <form onSubmit={this.onSubmit}>
-            {errMsg.length > 0 && <Alert msg={errMsg} color='danger' />}
+            {this.props.error.message.length > 0 && (
+              <Alert msg={this.props.error.message} color='danger' />
+            )}
             {isCreated && <Alert msg='Event created.' color='success' />}
 
             <Input
               type='text'
               name='name'
               label='Event Name'
+              value={this.state.name}
               onChange={this.onChange}
             />
 
@@ -60,6 +66,7 @@ class CreateEvent extends Component {
               type='text'
               name='code'
               label='Event Code'
+              value={this.state.code}
               onChange={this.onChange}
             />
 
@@ -67,6 +74,7 @@ class CreateEvent extends Component {
               inputType='datetime'
               name='start'
               label='Event Start'
+              value={this.state.start}
               onChange={this.onChange}
             />
 
@@ -74,6 +82,7 @@ class CreateEvent extends Component {
               inputType='datetime'
               name='end'
               label='Event End'
+              value={this.state.end}
               onChange={this.onChange}
             />
 

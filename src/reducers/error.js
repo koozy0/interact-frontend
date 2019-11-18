@@ -1,7 +1,7 @@
 import { DELETE_ERRORS, UPDATE_ERRORS } from '../actions/types';
 
 const initialState = {
-  data: {},
+  message: '',
   status: null,
   code: null,
 };
@@ -10,14 +10,14 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case DELETE_ERRORS:
       return {
-        data: {},
+        message: '',
         status: null,
         code: null,
       };
 
     case UPDATE_ERRORS:
       return {
-        data: action.payload,
+        message: action.payload.message,
         status: action.payload.status,
         code: action.payload.code,
       };

@@ -36,16 +36,15 @@ class LoginAdmin extends Component {
   }
 
   render() {
-    const { data: err } = this.props.error;
-    const errMsg = err.message || (err.data && err.data.message) || '';
-
     return (
       <div className='container'>
         <div className='content'>
           <h1 className='mb-3'>Login Admin</h1>
 
           <form autoComplete='off' onSubmit={this.onSubmit}>
-            {errMsg.length > 0 && <Alert msg={errMsg} color='danger' />}
+            {this.props.error.message.length > 0 && (
+              <Alert msg={this.props.error.message} color='danger' />
+            )}
 
             <Input
               type='text'

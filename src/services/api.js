@@ -29,7 +29,7 @@ class ApiService {
     if (axios.isCancel(error)) {
       console.log('Request cancelled:', error);
     } else {
-      return Promise.reject(error);
+      return Promise.reject(error.response.data);
     }
   }
 

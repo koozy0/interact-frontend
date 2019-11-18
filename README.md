@@ -1,8 +1,22 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Required Configuration
+## Getting Started
 
-Create a `.env` file using `.env.example` for reference. Fill in the values as required.
+- Clone the project: `git clone <project-repository-url>`
+
+- Install dependencies: `npm i`
+
+- Start the development server: `npm start`
+
+## Todos
+
+- Add functionality for the admin views
+
+- Add functionality to emit events for `update_question` and `delete_question` to the respective routes
+
+- Add functionality to log events emitted by `socket.io`
+
+- Add a Dockerfile and build Docker image
 
 ## Available Scripts
 

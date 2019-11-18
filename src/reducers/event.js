@@ -11,6 +11,7 @@ import {
 const initialState = {
   events: [],
   event: null,
+  newEvent: null,
   isLoading: false,
 };
 
@@ -19,6 +20,7 @@ export default function(state = initialState, action) {
     case CREATE_EVENT:
       return {
         ...state,
+        newEvent: action.payload,
       };
 
     case DELETE_EVENT:

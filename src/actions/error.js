@@ -6,12 +6,12 @@ export const deleteErrors = () => {
   };
 };
 
-export const updateErrors = (err, id) => {
-  const data = (err.response && err.response.data) || err;
-  const status = (err.response && err.response.status) || null;
+export const updateErrors = (err, code) => {
+  const message = err.message;
+  const status = err.status || err.response.status;
 
   return {
     type: UPDATE_ERRORS,
-    payload: { data, status, id },
+    payload: { message, status, code },
   };
 };

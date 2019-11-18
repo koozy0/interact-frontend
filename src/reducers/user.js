@@ -1,5 +1,6 @@
 import {
   AUTH_ERROR,
+  CREATE_USER,
   USER_LOADED,
   USER_LOADING,
   USER_LOGIN,
@@ -21,6 +22,14 @@ export default function(state = initialState, action) {
         isAuthenticated: false,
         isLoading: false,
         user: null,
+      };
+
+    case CREATE_USER:
+      return {
+        token: action.payload.token,
+        isAuthenticated: true,
+        isLoading: false,
+        user: action.payload.user,
       };
 
     case USER_LOGIN:

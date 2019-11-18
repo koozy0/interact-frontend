@@ -52,6 +52,10 @@ interactApi.questions.fetchQuestions = eventId => {
 interactApi.questions.updateQuestion = (questionId, token) => {};
 
 // User
+interactApi.users.createUser = payload => {
+  return client.post('/users', payload);
+};
+
 interactApi.users.login = ({ username, password }) => {
   return client.post('/auth', { username, password });
 };

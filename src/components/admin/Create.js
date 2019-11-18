@@ -1,5 +1,3 @@
-import {} from '../../actions/user';
-
 import React, { Component } from 'react';
 
 import Alert from '../Alert';
@@ -7,6 +5,7 @@ import Button from '../Button';
 import Input from '../Input';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { createUser } from '../../actions/user';
 import { deleteErrors } from '../../actions/error';
 
 class CreateAdmin extends Component {
@@ -31,8 +30,7 @@ class CreateAdmin extends Component {
   onSubmit = e => {
     e.preventDefault();
     const { username, password, name, email, role, secret } = this.state;
-    // this.props.userLogin({ username, password, secret });
-    console.log({ username, password, name, email, role, secret });
+    this.props.createUser({ username, password, name, email, role, secret });
   };
 
   componentDidUpdate() {
@@ -42,16 +40,15 @@ class CreateAdmin extends Component {
   }
 
   render() {
-    const { data: err } = this.props.error;
-    const errMsg = err.message || (err.data && err.data.message) || '';
-
     return (
       <div className='container'>
         <div className='content'>
           <h1 className='mb-3'>Create Admin</h1>
 
           <form autoComplete='off' onSubmit={this.onSubmit}>
-            {errMsg.length > 0 && <Alert msg={errMsg} color='danger' />}
+            {this.props.error.message.length > 0 && (
+              <Alert msg={this.props.error.message} color='danger' />
+            )}
 
             <Input
               type='text'
@@ -108,7 +105,10 @@ const mapStateToProps = state => ({
   error: state.error,
 });
 
-const mapDispatchToProps = { deleteErrors };
+const mapDispatchToProps = {
+  deleteErrors,
+  createUser,
+};
 
 export default connect(
   mapStateToProps,
