@@ -3,11 +3,11 @@ import { Route, Switch } from 'react-router-dom';
 
 import Admin from './components/admin/Admin';
 import CreateAdmin from './components/admin/Create';
-import CreateEvent from './components/admin/CreateEvent';
+import CreateEvent from './components/event/Create';
 import Event from './components/event/Event';
 import Home from './components/home/Home';
 import LoginAdmin from './components/admin/Login';
-import ManageEvent from './components/admin/ManageEvent';
+import ManageEvent from './components/event/Manage';
 import NotFound from './components/NotFound';
 import PrivateRoute from './components/admin/PrivateRoute';
 import { connect } from 'react-redux';

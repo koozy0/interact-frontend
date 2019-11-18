@@ -20,9 +20,7 @@ class ManageEvent extends Component {
             <h1>Manage Events</h1>
 
             <Link to='/admin' style={styles.back}>
-              <i className='material-icons' style={styles.link}>
-                arrow_back
-              </i>
+              <i className='material-icons mr-2'>arrow_back</i>
               Back
             </Link>
           </div>
