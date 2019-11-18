@@ -4,10 +4,10 @@ import './styles/styles.css';
 import React, { Component } from 'react';
 
 import AppRoutes from './AppRoutes';
+import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
-// import openSocket from 'socket.io-client';
 import store from './store';
 
 class App extends Component {
@@ -19,6 +19,8 @@ class App extends Component {
             <Navbar />
 
             <AppRoutes></AppRoutes>
+
+            <Footer></Footer>
           </div>
         </Router>
       </Provider>
