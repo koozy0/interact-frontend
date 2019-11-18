@@ -24,11 +24,17 @@ const Question = ({ question }) => {
           </span>
         </div>
         <div style={styles.votes}>
-          <button style={{ ...styles.vote, ...styles.downvote }}>
+          <button
+            style={{ ...styles.vote, ...styles.downvote }}
+            title='Work in progress'
+          >
             <span className='mr-3'>{downvotes}</span>
             <i className='material-icons'>thumb_down_alt</i>
           </button>
-          <button style={{ ...styles.vote, ...styles.upvote }}>
+          <button
+            style={{ ...styles.vote, ...styles.upvote }}
+            title='Work in progress'
+          >
             <i className='material-icons'>thumb_up_alt</i>
             <span className='ml-3'>{upvotes}</span>
           </button>

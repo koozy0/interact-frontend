@@ -56,7 +56,7 @@ export class Event extends Component {
         <div style={styles.section}>
           {event ? (
             <div className='z-elevate-1' style={styles.info}>
-              <h3 className='mb-3'>Event Information</h3>
+              <h2 className='mb-3'>Event Information</h2>
               <p>{event.name}</p>
               <p>
                 {moment(event.start).format('MMM D YYYY, hh:mm A')} -{' '}
