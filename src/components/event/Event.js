@@ -8,6 +8,8 @@ import {
 import QuestionForm from './QuestionForm';
 import QuestionList from './QuestionList';
 import { connect } from 'react-redux';
+import { fetchEventById } from '../../actions/event';
+import moment from 'moment';
 import openSocket from 'socket.io-client';
 
 export class Event extends Component {
@@ -16,6 +18,9 @@ export class Event extends Component {
   };
 
   componentDidMount() {
+    if (!this.props.event.event) {
+      this.props.fetchEventById(this.props.match.params.eventId);
+    }
     // fetch questions
     this.props.fetchQuestions(this.props.match.params.eventId);
     // open socket connection here
@@ -44,10 +49,23 @@ export class Event extends Component {
 
   render() {
     const { questions } = this.props.question;
+    const { event } = this.props.event;
 
     return (
       <div className='container'>
         <div style={styles.section}>
+          {event ? (
+            <div className='z-elevate-1' style={styles.info}>
+              <h3 className='mb-3'>Event Information</h3>
+              <p>{event.name}</p>
+              <p>
+                {moment(event.start).format('MMM D YYYY, hh:mm A')} -{' '}
+                {moment(event.end).format('MMM D YYYY, hh:mm A')}
+              </p>
+              <p>#{event.code}</p>
+            </div>
+          ) : null}
+
           <QuestionForm
             onSubmit={this.onSubmit}
             isLoading={this.props.event.isLoading}
@@ -72,6 +90,7 @@ const mapDispatchToProps = {
   createQuestion,
   fetchQuestions,
   questionCreated,
+  fetchEventById,
 };
 
 export default connect(
@@ -85,7 +104,13 @@ const styles = {
     maxWidth: '50em',
     width: '100%',
   },
-  textareaWrapper: { position: 'relative' },
+  info: {
+    borderRadius: '4px',
+    padding: '20px 40px',
+  },
+  textareaWrapper: {
+    position: 'relative',
+  },
   textareaIcon: {
     alignItems: 'center',
     color: 'var(--primary)',

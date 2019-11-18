@@ -15,8 +15,16 @@ interactApi.events.deleteEvent = (token, eventId) => {
   return client.delete(`/events/${eventId}`, tokenConfig(token));
 };
 
-interactApi.events.fetchEvent = eventId => {
+interactApi.events.fetchEventById = eventId => {
   return client.get(`/events/${eventId}`);
+};
+
+interactApi.events.fetchEventByCode = eventcode => {
+  return client.get(`/events/find`, {
+    params: {
+      eventcode: eventcode.trim(),
+    },
+  });
 };
 
 interactApi.events.fetchEvents = (eventcode, cancelToken) => {

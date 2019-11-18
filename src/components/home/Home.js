@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { fetchEvent, fetchEvents } from '../../actions/event';
+import { fetchEventByCode, fetchEvents } from '../../actions/event';
 
 import Alert from '../Alert';
 import Autocomplete from './Autocomplete';
@@ -43,7 +43,7 @@ class Home extends Component {
   onSubmit = e => {
     e.preventDefault();
     // fetch event and redirect to event page if successful
-    this.props.fetchEvent(this.state.searchTerm, this.props.history);
+    this.props.fetchEventByCode(this.state.searchTerm, this.props.history);
   };
 
   render() {
@@ -85,7 +85,11 @@ const mapStateToProps = state => ({
   error: state.error,
 });
 
-const mapDispatchToProps = { fetchEvent, fetchEvents, deleteErrors };
+const mapDispatchToProps = {
+  fetchEventByCode,
+  fetchEvents,
+  deleteErrors,
+};
 
 export default connect(
   mapStateToProps,

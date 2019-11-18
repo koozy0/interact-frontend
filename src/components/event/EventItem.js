@@ -17,7 +17,7 @@ export default function EventItem({
           <h3>{name}</h3>
           <p>#{code}</p>
         </div>
-        <Link style={styles.manage}>
+        <Link style={styles.manage} title='Work in progress'>
           <i className='material-icons mr-2' style={styles.link}>
             list
           </i>
