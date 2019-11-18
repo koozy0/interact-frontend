@@ -9,15 +9,16 @@ export const AutcompleteListItem = ({ name, code, start, end, onSelect }) => {
     <li className='autocomplete-list-item' onClick={onSelect}>
       <span className='d-block'>{name}</span>
       <span className='d-block'># {code}</span>
-      <span className='d-block'>Start: {start}</span>
-      <span className='d-block'>End: {end}</span>
+      <span>
+        {start} - {end}
+      </span>
     </li>
   );
 };
 
 export class Autocomplete extends Component {
   formatTimestamp = timestamp =>
-    moment(timestamp).format('ddd, DD-MM-YYYY, hh:mm:ss A');
+    moment(timestamp).format('DD/MM/YYYY, hh:mm A');
 
   render() {
     const { suggestions, onChange, onSubmit, isLoading } = this.props;
