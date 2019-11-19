@@ -8,6 +8,18 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 - Start the development server: `npm start`
 
+### From Docker image
+
+- Extract the image to a directory
+
+- Open up a terminal and `cd` into the directory containing the image
+
+- Run the following command to run the container:
+
+  `docker container run --publish 8000:3000 --detach --name fe shopback_frontend:1.0`
+
+- Visit the application in a browser at `localhost:8000`
+
 ## Todos
 
 - Add functionality to upvote and downvote questions
